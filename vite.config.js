@@ -8,9 +8,7 @@ import postcssComment from 'postcss-comment';
 
 export default defineConfig(
   {
-    plugins: [
-      handlebarsPrecompile()
-    ],
+    plugins: [handlebarsPrecompile()],
     css: {
       postcss: {
         parser: postcssComment,
