@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import handlebarsPrecompile from './plugins/handlebars-precompile.js';
+import handlebarsPrecompile from './plugins/handlebars-precompile';
 import postcssNested from 'postcss-nested';
 import postcssImport from 'postcss-import';
 import postcssMixins from 'postcss-mixins';
