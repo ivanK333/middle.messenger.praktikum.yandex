@@ -1,0 +1,25 @@
+{
+  "name": "chat",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "express": "4.18.2",
+    "postcss": "8.4.24",
+    "postcss-comment": "2.0.0",
+    "postcss-import": "15.1.0",
+    "postcss-mixins": "9.0.4",
+    "postcss-nested": "6.0.1",
+    "postcss-simple-vars": "7.0.1",
+    "vite": "4.3.9"
+  },
+  "dependencies": {
+    "handlebars": "4.7.7"
+  }
+}

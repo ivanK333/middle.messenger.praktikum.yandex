@@ -1,0 +1,21 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+.container {
+    @mixin flexbox;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    background: $color-bg-0;
+}
+
+.title {
+    @mixin typography-text-xxl;
+    margin-bottom: 16px;
+}
+
+.code {
+    @mixin typography-text-xxxl;
+    margin-bottom: 24px;
+}

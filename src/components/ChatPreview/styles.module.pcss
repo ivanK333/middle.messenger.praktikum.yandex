@@ -1,0 +1,62 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+.container {
+    @mixin flexbox initial;
+    border-bottom: 1px solid $color-line;
+    padding: 10px 16px 11px;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+        background: $color-palette-lightblue-4;
+    }
+}
+
+.wrapper {
+    @mixin flexbox initial, space-between;
+    flex-direction: column;
+    margin-left: 12px;
+    min-height: 100%;
+    width: 100%;
+}
+
+.header {
+    @mixin flexbox flex-start, space-between;
+}
+
+.footer {
+    @mixin flexbox center, space-between;
+}
+
+.date {
+    @mixin typography-text-m;
+    color: $color-text-grey;
+}
+
+.title {
+    @mixin typography-text-l;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+}
+
+.message {
+    @mixin typography-text-m;
+    color: $color-text-grey;
+    margin-right: 8px;
+}
+
+.count {
+    @mixin flexbox;
+    @mixin typography-text-m;
+
+    background: $color-text-tertiary;
+    border-radius: 50%;
+    min-width: 24px;
+    min-height: 24px;
+    width: 24px;
+    height: 24px;
+    color: $color-text-white;
+}

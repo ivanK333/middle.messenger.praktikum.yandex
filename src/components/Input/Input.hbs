@@ -1,0 +1,21 @@
+<div class="{{className}}">
+    <div>
+        <input
+          type="{{type}}"
+          value="{{value}}"
+          id="{{name}}"
+          name="{{name}}"
+          class="{{classNameInput}}"
+          placeholder=""
+          {{#if disabled}}
+            disabled={{disabled}}
+          {{/if}}
+        />
+
+        <label for="{{name}}" class="{{classNamePlaceholder}}">{{placeholder}}</label>
+    </div>
+
+    {{#if error}}
+        <span class="{{classNameError}}">{{error}}</span>
+    {{/if}}
+</div>

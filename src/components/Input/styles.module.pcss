@@ -1,0 +1,60 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.placeholder {
+    @mixin typography-text-m;
+
+    position: absolute;
+    color: $color-text-secondary;
+    left: 12px;
+    top: 6px;
+    transition: color $default-transition-ms $default-transition-easing;
+}
+
+.input:not(:disabled) + .errorPlaceholder {
+    color: $color-text-error;
+}
+
+.input {
+    @mixin typography-text-m;
+
+    height: $input-height;
+    padding-left: 12px;
+    padding-top: 12px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: $color-bg-2;
+
+    &:disabled {
+        border: 1px dashed $color-palette-grey-2;
+        background: $color-bg-0;
+    }
+
+    &:not(:disabled) {
+        &.errorInput {
+            border-color: $color-text-error;
+        }
+
+        &:not(.errorInput):hover + .placeholder {
+            color: $color-text-grey;
+        }
+
+        &:not(.errorInput):focus + .placeholder {
+            color: $color-text-secondary;
+        }
+    }
+}
+
+.text {
+    @mixin typography-text-m;
+
+    &.errorText {
+        color: $color-text-error;
+    }
+}

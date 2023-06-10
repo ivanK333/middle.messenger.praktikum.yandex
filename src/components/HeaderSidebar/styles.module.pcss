@@ -1,0 +1,28 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+.header {
+    padding: 12px 16px;
+    border-bottom: solid 1px $color-line;
+}
+
+.userInfo {
+    @mixin flexbox center, space-between;
+
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.avatar {
+    @mixin flexbox;
+}
+
+.name {
+    margin-left: 12px;
+}
+
+.button {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
