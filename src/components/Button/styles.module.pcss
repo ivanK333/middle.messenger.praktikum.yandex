@@ -1,0 +1,35 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+.button {
+    @mixin typography-text-xl;
+
+    font-weight: 700;
+    width: 100%;
+    border-radius: 8px;
+    border: none;
+    padding: 13px 14px;
+    transition: color $default-transition-ms $default-transition-easing,
+      background-color $default-transition-ms $default-transition-easing;
+}
+
+
+.default {
+    background: $color-palette-lightblue-1;
+    color: $color-text-white;
+
+    &:hover {
+        background: $color-palette-lightblue-2;
+        color: $color-text-white;
+    }
+}
+
+.ghost {
+    background: transparent;
+    color: $color-text-primary;
+
+    &:hover {
+        background: $color-palette-grey-2;
+        color: $color-text-tertiary;
+    }
+}

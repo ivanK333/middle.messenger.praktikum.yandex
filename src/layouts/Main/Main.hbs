@@ -1,0 +1,14 @@
+<header class="{{classNameHeader}}">
+    <nav class="{{classNameNav}}">
+        <ul class="{{classNameNavList}}">
+            {{#each links}}
+                <li id="{{title}}">
+                    <a href="{{href}}">{{title}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    </nav>
+</header>
+<main class="{{classNameMain}}">
+    {{{children}}}
+</main>

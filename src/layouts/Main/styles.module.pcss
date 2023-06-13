@@ -1,0 +1,28 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+$header-height: 24px;
+
+.header {
+    @mixin flexbox;
+    height: $header-height;
+}
+
+.nav {
+    width: 100%;
+    max-width: 800px;
+}
+
+.navList {
+    @mixin flexbox center, space-between;
+    width: 100%;
+
+    a {
+        color: $color-text-tertiary;
+    }
+}
+
+.main {
+    width: 100%;
+    height: calc(100% - $header-height);
+}

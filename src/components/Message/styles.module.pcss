@@ -1,0 +1,41 @@
+@import "../../styles/_variables.pcss";
+@import "../../styles/_mixins.pcss";
+
+.wrap {
+    padding: 12px;
+    margin: 12px;
+    border: none;
+    background: $color-bg-2;
+    max-width: 60%;
+    border-radius: 0 8px 8px 8px;
+}
+
+.message {
+    @mixin typography-text-m;
+}
+
+.info {
+    @mixin flexbox center, flex-end;
+}
+
+.date {
+    @mixin typography-text-s;
+
+    color: $color-text-grey;
+}
+
+.send {
+    @mixin flexbox center, flex-end;
+
+    .wrap {
+        border-radius: 8px 8px 0 8px;
+        background: $color-palette-lightblue-3;
+    }
+
+
+    .date {
+        @mixin typography-text-s;
+
+        color: $color-text-white;
+    }
+}

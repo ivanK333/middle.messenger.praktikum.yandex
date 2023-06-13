@@ -1,0 +1,41 @@
+@import "_variables.pcss";
+
+@define-mixin flexbox $align: $default-flexbox-align, $justify: $default-flexbox-justify {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+/**
+  Text mixins
+ */
+@define-mixin typography-text-s {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+@define-mixin typography-text-m {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@define-mixin typography-text-l {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@define-mixin typography-text-xl {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@define-mixin typography-text-xxl {
+  font-size: 24px;
+  line-height: 26px;
+}
+
+@define-mixin typography-text-xxxl {
+  font-size: 40px;
+  line-height: 40px;
+}
+

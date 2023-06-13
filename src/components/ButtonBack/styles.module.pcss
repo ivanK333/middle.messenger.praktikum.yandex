@@ -1,0 +1,16 @@
+@import "../../styles/_mixins.pcss";
+@import "../../styles/_variables.pcss";
+
+.button {
+    @mixin flexbox;
+
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: $color-palette-lightblue-1;
+
+    &:hover {
+        background: $color-palette-lightblue-2;
+    }
+}

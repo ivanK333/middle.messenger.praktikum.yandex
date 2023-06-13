@@ -1,0 +1,2 @@
+export { InputChat } from './InputChat';
+
