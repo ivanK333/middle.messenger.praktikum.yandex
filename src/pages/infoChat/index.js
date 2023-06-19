@@ -1,1 +1,0 @@
-export { InfoChat } from './InfoChat';
