@@ -8,4 +8,4 @@ export const ROUTES = {
   chat: '/chat',
   notFound: '/404',
   internalError: '/500',
-}
+};

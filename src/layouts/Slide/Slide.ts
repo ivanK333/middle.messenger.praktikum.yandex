@@ -4,7 +4,6 @@ import { Props } from '.';
 import styles from './styles.module.pcss';
 
 export class Slide extends Block<Props> {
-
   render() {
     return template({
       ...this.props,
@@ -13,5 +12,3 @@ export class Slide extends Block<Props> {
     });
   }
 }
-
-

@@ -3,8 +3,8 @@ import { ButtonSend } from '../ButtonSend';
 import staple from '../../../static/img/staple.svg';
 import template from './MessageConsole.hbs';
 import styles from './styles.module.pcss';
-import { Props } from ".";
-import { Block } from "../../libs";
+import { Props } from '.';
+import { Block } from '../../libs';
 
 export class MessageConsole extends Block<Props> {
   render() {
@@ -21,7 +21,7 @@ export class MessageConsole extends Block<Props> {
         placeholder: 'Message',
         className: styles.input,
         name: 'message',
-        value: ''
+        value: '',
       }).render(),
       img: staple,
       button: new ButtonSend({}).render(),

@@ -2,7 +2,7 @@ import template from './Message.hbs';
 import check from '../../../static/img/check.svg';
 import { Props } from '.';
 import styles from './styles.module.pcss';
-import { Block } from "../../libs";
+import { Block } from '../../libs';
 
 export class Message extends Block<Props> {
   render() {

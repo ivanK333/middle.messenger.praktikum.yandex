@@ -1,4 +1,4 @@
 declare module '*.hbs' {
-  const content: (any) => void;
-  export default content
+  const content: (props: any) => string;
+  export default content;
 }

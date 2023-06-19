@@ -1,13 +1,21 @@
+import {
+  Input,
+  Button,
+  Link,
+  AvatarUpload,
+  ButtonBack,
+} from '../../components';
+
 export type Props = {
-  avatar: Element,
-  email: Element,
-  login: Element,
-  firstName: Element,
-  secondName: Element,
-  phone: Element,
-  chatName: Element,
-  changeData: Element,
-  changePassword: Element,
-  logOut: Element,
-  buttonBack: Element,
-}
+  avatar: AvatarUpload,
+  email: Input,
+  login: Input,
+  firstName: Input,
+  secondName: Input,
+  phone: Input,
+  chatName: Input,
+  changeData: Button,
+  changePassword: Link,
+  logOut: Link,
+  buttonBack: ButtonBack,
+};

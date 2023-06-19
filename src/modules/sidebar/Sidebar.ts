@@ -1,8 +1,8 @@
 import template from './Sidebar.hbs';
 import styles from './styles.module.pcss';
-import { Props } from ".";
-import { Block } from "../../libs";
-import { HeaderSidebar } from "../../components";
+import { Props } from '.';
+import { Block } from '../../libs';
+import { HeaderSidebar } from '../../components';
 
 export class Sidebar extends Block<Props> {
   render() {

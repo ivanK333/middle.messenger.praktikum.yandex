@@ -1,8 +1,8 @@
 export type chat = {
   id: string,
-  chat: Element,
-}
+  chat: string,
+};
 
 export type Props = {
   chats: chat[];
-}
+};

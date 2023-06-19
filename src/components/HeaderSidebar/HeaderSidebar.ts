@@ -4,8 +4,8 @@ import newChat from '../../../static/img/new_chat.svg';
 import search from '../../../static/img/search.svg';
 import template from './HeaderSidebar.hbs';
 import styles from './styles.module.pcss';
-import { Block } from "../../libs";
-import { Props } from ".";
+import { Block } from '../../libs';
+import { Props } from '.';
 
 export class HeaderSidebar extends Block<Props> {
   render() {

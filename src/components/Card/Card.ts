@@ -1,6 +1,6 @@
 import template from './Card.hbs';
-import { Block } from "../../libs";
-import { Props } from ".";
+import { Block } from '../../libs';
+import { Props } from '.';
 import styles from './styles.module.pcss';
 
 export class Card extends Block<Props> {

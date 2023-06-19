@@ -4,11 +4,11 @@ import {
   Button,
   Link,
   Card,
-} from "../../components";
-import { ROUTES } from "../../appConstants";
-import { Slide } from "../../layouts";
-import { Block } from "../../libs";
-import { Props } from ".";
+} from '../../components';
+import { ROUTES } from '../../appConstants';
+import { Slide } from '../../layouts';
+import { Block } from '../../libs';
+import { Props } from '.';
 
 export class SignIn extends Block<Props> {
   constructor() {
@@ -19,43 +19,41 @@ export class SignIn extends Block<Props> {
         placeholder: 'Login',
         className: styles.login,
         value: '',
-      }).render(),
+      }),
       password: new Input({
         type: 'password',
         name: 'password',
         placeholder: 'Password',
         className: styles.password,
         value: '',
-      }).render(),
+      }),
       signIn: new Button({
         type: 'submit',
         view: 'default',
         children: 'Sign in',
         name: 'sign_in',
         className: styles.signIn,
-      }).render(),
+      }),
       signUp: new Link({
         children: 'Sign up',
         href: ROUTES.signUp,
-      }).render(),
-    })
+      }),
+    });
   }
 
   render() {
     const content = `
-    ${this.props.login}
-    ${this.props.password}
-    ${this.props.signIn}
-    ${this.props.signUp}
-    `
+    ${this.props.login.render()}
+    ${this.props.password.render()}
+    ${this.props.signIn.render()}
+    ${this.props.signUp.render()}
+    `;
 
     return new Slide({
       children: new Card({
         children: content,
-        title: "Sign in",
+        title: 'Sign in',
       }).render(),
     }).render();
   }
 }
-
-

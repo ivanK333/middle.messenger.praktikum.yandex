@@ -1,7 +1,9 @@
+import { Input, Button, ButtonBack } from '../../components';
+
 export type Props = {
-  oldPassword: Element,
-  newPassword: Element,
-  reEnterNewPassword: Element,
-  save: Element,
-  buttonBack: Element,
-}
+  oldPassword: Input,
+  newPassword: Input,
+  reEnterNewPassword: Input,
+  save: Button,
+  buttonBack: ButtonBack,
+};

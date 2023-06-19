@@ -1,4 +1,4 @@
 export type Props = {
-  sidebar: Element,
-  activeChat: Element,
+  sidebar: string,
+  activeChat: string,
 };

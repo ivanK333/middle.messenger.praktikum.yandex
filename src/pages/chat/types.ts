@@ -1,4 +1,6 @@
+import { Sidebar, ChatActive } from '../../modules';
+
 export type Props = {
-  sidebar: Element,
-  activeChat: Element,
-}
+  sidebar: Sidebar,
+  activeChat: ChatActive,
+};

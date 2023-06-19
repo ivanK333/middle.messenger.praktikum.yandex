@@ -1,12 +1,11 @@
-import template from "./Main.hbs";
-import { Block } from "../../libs";
-import { Props } from ".";
+import template from './Main.hbs';
+import { Block } from '../../libs';
+import { Props } from '.';
 import styles from './styles.module.pcss';
-import { LINKS } from "../../appConstants";
+import { LINKS } from '../../appConstants';
 
 export class Main extends Block<Props> {
   render() {
-
     return template({
       ...this.props,
       classNameHeader: styles.header,
@@ -17,5 +16,3 @@ export class Main extends Block<Props> {
     });
   }
 }
-
-

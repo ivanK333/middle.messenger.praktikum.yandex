@@ -1,4 +1,4 @@
 export type Props = {
-  children: Element,
-  buttonBack?: Element,
+  children: string,
+  buttonBack?: string,
 };

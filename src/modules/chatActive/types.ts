@@ -1,9 +1,8 @@
 export type message = {
   id: string,
-  message: Element,
-}
+  message: string,
+};
 
 export type Props = {
-  messageConsole: Element;
   messages: message[];
-}
+};

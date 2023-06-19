@@ -1,3 +1,3 @@
 export type Props = {
-  children: Element,
+  children: string | null,
 };

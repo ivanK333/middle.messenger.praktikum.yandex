@@ -1,11 +1,10 @@
-import { Error } from "../../layouts";
-import { Link } from "../../components";
+import { Error } from '../../layouts';
+import { Link } from '../../components';
 
-import { ROUTES } from "../../appConstants";
+import { ROUTES } from '../../appConstants';
 
 export class NotFound {
   render() {
-
     return new Error({
       code: '404',
       title: 'Wrong place',
@@ -16,5 +15,3 @@ export class NotFound {
     }).render();
   }
 }
-
-

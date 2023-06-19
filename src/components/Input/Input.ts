@@ -1,7 +1,7 @@
 import template from './Input.hbs';
 import styles from './styles.module.pcss';
-import { Block } from "../../libs";
-import { Props } from ".";
+import { Block } from '../../libs';
+import { Props } from '.';
 
 export class Input extends Block<Props> {
   render() {

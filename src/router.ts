@@ -1,4 +1,4 @@
-import { ROUTES } from "./appConstants";
+import { ROUTES } from './appConstants';
 import {
   ChangePassword,
   Profile,
@@ -9,7 +9,7 @@ import {
   Chat,
   NotFound,
   InternalError,
-} from "./pages";
+} from './pages';
 
 export const router = () => {
   switch (window.location.pathname) {

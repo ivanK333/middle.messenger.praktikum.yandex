@@ -5,16 +5,16 @@ export default function handlebarsPrecompile() {
 
   return {
     name: 'vite-plugin-handlebars-precompile',
-    transform(src, id) {
+    transform(src: any, id: string): string | undefined {
       if (!fileRegexp.test(id)) {
-        return;
+        return undefined;
       }
 
-      return `
+      return (`
         import Handlebars from 'handlebars/runtime';
         
         export default Handlebars.template(${Handlebars.precompile(src)});
-      `;
-    }
-  }
-};
+      `);
+    },
+  };
+}

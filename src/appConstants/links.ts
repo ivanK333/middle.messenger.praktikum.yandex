@@ -1,40 +1,40 @@
-import { ROUTES } from "./routes";
+import { ROUTES } from './routes';
 
 export const LINKS = [
   {
     href: ROUTES.signIn,
-    title: "Sign in"
+    title: 'Sign in',
   },
   {
     href: ROUTES.signUp,
-    title: "Sign up"
+    title: 'Sign up',
   },
   {
     href: ROUTES.profile,
-    title: "Profile"
+    title: 'Profile',
   },
   {
     href: ROUTES.changePassword,
-    title: "Change password"
+    title: 'Change password',
   },
   {
     href: ROUTES.createChat,
-    title: "Create chat"
+    title: 'Create chat',
   },
   {
     href: ROUTES.infoChat,
-    title: "InfoChat"
+    title: 'InfoChat',
   },
   {
     href: ROUTES.chat,
-    title: "Chat"
+    title: 'Chat',
   },
   {
     href: ROUTES.notFound,
-    title: "404"
+    title: '404',
   },
   {
     href: ROUTES.internalError,
-    title: "500"
-  }
+    title: '500',
+  },
 ];

@@ -3,8 +3,7 @@ import { Block } from '../../libs';
 import { Props } from '.';
 import styles from './styles.module.pcss';
 
-export class Dashboard extends Block<Props>{
-
+export class Dashboard extends Block<Props> {
   render() {
     const {
       className = '',
