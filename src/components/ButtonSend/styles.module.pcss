@@ -1,19 +1,19 @@
-@import "../../styles/_mixins.pcss";
-@import "../../styles/_variables.pcss";
+@import url("../../styles/_mixins.pcss");
+@import url("../../styles/_variables.pcss");
 
 .button {
-    @mixin flexbox;
+  @mixin flexbox;
 
-    min-width: 44px;
-    min-height: 44px;
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 50%;
-    background: $color-palette-lightblue-1;
-    transform: rotate(180deg);
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: $color-palette-lightblue-1;
+  transform: rotate(180deg);
 
-    &:hover {
-        background: $color-palette-lightblue-2;
-    }
+  &:hover {
+    background: $color-palette-lightblue-2;
+  }
 }

@@ -1,43 +1,40 @@
-@import "../../styles/_mixins.pcss";
-@import "../../styles/_variables.pcss";
+@import url("../../styles/_mixins.pcss");
+@import url("../../styles/_variables.pcss");
 
 .input {
-    display: none;
+  display: none;
 }
 
 .img {
-    fill: $color-palette-grey-2;
+  fill: $color-palette-grey-2;
 }
 
 .label {
-    @mixin flexbox;
+  @mixin flexbox;
 
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    text-align: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: $color-bg-3;
-    border-radius: 50%;
-    color: $color-text-white;
-    transition: opacity $default-transition-ms $default-transition-easing;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  text-align: center;
+  inset: 0;
+  background: $color-bg-3;
+  border-radius: 50%;
+  color: $color-text-white;
+  transition: opacity $default-transition-ms $default-transition-easing;
 }
 
 .container {
-    @mixin flexbox;
+  @mixin flexbox;
 
-    position: relative;
-    width: 100px;
-    height: 100px;
-    background: $color-palette-grey-3;
-    border-radius: 50%;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: $color-palette-grey-3;
+  border-radius: 50%;
 
-    &:hover {
-        .label {
-            opacity: 1;
-        }
+  &:hover {
+    .label {
+      opacity: 1;
     }
+  }
 }

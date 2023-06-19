@@ -1,14 +1,15 @@
-@import "../../styles/_variables.pcss";
-@import "../../styles/_mixins.pcss";
+@import url("../../styles/_variables.pcss");
+@import url("../../styles/_mixins.pcss");
 
 .header {
-    @mixin flexbox center, flex-start;
-    padding: 12px 16px;
-    border-bottom: solid 1px $color-line;
+  @mixin flexbox center, flex-start;
+
+  padding: 12px 16px;
+  border-bottom: solid 1px $color-line;
 }
 
 .name {
-    @mixin typography-text-xl;
+  @mixin typography-text-xl;
 
-    margin-left: 12px;
+  margin-left: 12px;
 }
