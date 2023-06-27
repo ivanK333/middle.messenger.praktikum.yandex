@@ -5,7 +5,7 @@ import { Block } from '../../libs';
 
 export class Error extends Block<Props> {
   render() {
-    return template({
+    return this.compile(template, {
       ...this.props,
       className: styles.container,
       classNameCode: styles.code,

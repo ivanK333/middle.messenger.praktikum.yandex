@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const content = document.getElementById('root');
 
   if (content) {
-    content.innerHTML = new Main({ children: router() }).render();
+    content.appendChild(new Main({ children: router() }).render());
   }
 });
 

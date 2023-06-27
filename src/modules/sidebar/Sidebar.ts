@@ -5,17 +5,24 @@ import { Block } from '../../libs';
 import { HeaderSidebar } from '../../components';
 
 export class Sidebar extends Block<Props> {
+  constructor(props) {
+    super({
+      ...props,
+      header: new HeaderSidebar({ name: 'ivan' }),
+    });
+  }
+
   render() {
     const {
       className = '',
       ...props
     } = this.props;
 
-    return template({
+    console.log(4, this.props);
+    return this.compile(template, {
       ...props,
       className: `${styles.sidebar} ${className}`,
       classNameChats: `${styles.chats} ${className}`,
-      header: new HeaderSidebar({ name: 'ivan' }).render(),
     });
   }
 }

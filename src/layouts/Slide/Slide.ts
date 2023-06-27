@@ -5,10 +5,13 @@ import styles from './styles.module.pcss';
 
 export class Slide extends Block<Props> {
   render() {
-    return template({
-      ...this.props,
-      classNameButtonBack: styles.buttonBack,
-      className: styles.container,
-    });
+    return this.compile(
+      template,
+      {
+        ...this.props,
+        classNameButtonBack: styles.buttonBack,
+        className: styles.container,
+      },
+    );
   }
 }

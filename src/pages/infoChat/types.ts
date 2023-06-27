@@ -1,13 +1,5 @@
-import {
-  Input,
-  Button,
-  AvatarUpload,
-  ButtonBack,
-} from '../../components';
+import { Slide } from '../../layouts';
 
 export type Props = {
-  avatar: AvatarUpload,
-  chatName: Input,
-  create: Button,
-  buttonBack: ButtonBack,
+  slide: Slide,
 };

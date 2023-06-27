@@ -1,8 +1,12 @@
+import { HeaderSidebar, ChatPreview } from '../../components';
+
 export type chat = {
   id: string,
-  chat: string,
+  chat: () => string,
 };
 
 export type Props = {
-  chats: chat[];
+  classNameChats?: string,
+  header?: HeaderSidebar,
+  chats: ChatPreview[];
 };

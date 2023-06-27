@@ -1,6 +1,6 @@
 export type Props = {
   className?: string,
-  classNameForm?: string,
+  classNameTitle?: string,
   title?: string,
-  children: string,
+  children: any,
 };

@@ -10,7 +10,7 @@ export class Avatar extends Block<Props> {
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.avatar} ${className}`,
       classNameImg: styles.img,

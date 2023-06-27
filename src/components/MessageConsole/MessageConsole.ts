@@ -7,24 +7,30 @@ import { Props } from '.';
 import { Block } from '../../libs';
 
 export class MessageConsole extends Block<Props> {
+  constructor(props) {
+    super({
+      ...props,
+      input: new InputChat({
+        placeholder: 'Message',
+        className: styles.input,
+        name: 'message',
+        value: '',
+      }),
+      button: new ButtonSend({}),
+    }, 'form');
+  }
+
   render() {
     const {
       className = '',
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.messageConsole} ${className}`,
       classNameImg: styles.img,
-      input: new InputChat({
-        placeholder: 'Message',
-        className: styles.input,
-        name: 'message',
-        value: '',
-      }).render(),
       img: staple,
-      button: new ButtonSend({}).render(),
     });
   }
 }

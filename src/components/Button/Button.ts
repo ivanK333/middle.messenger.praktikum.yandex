@@ -4,6 +4,10 @@ import { Props } from '.';
 import styles from './styles.module.pcss';
 
 export class Button extends Block<Props> {
+  constructor(props) {
+    super(props, 'button');
+  }
+
   render() {
     const {
       view = 'default',
@@ -12,8 +16,11 @@ export class Button extends Block<Props> {
       ...props
     } = this.props;
 
-    return template({
+    this._element.setAttribute('type', type);
+
+    return this.compile(template, {
       ...props,
+      view,
       type,
       className: `${styles.button} ${styles[view]} ${className}`,
     });

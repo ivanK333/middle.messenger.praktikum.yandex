@@ -7,15 +7,13 @@ export class Card extends Block<Props> {
   render() {
     const {
       className = '',
-      classNameForm = '',
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.container} ${className}`,
       classNameTitle: `${styles.title}`,
-      classNameForm: `${styles.form} ${classNameForm}`,
     });
   }
 }

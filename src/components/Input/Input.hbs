@@ -1,21 +1,19 @@
-<div class="{{className}}">
-    <div>
-        <input
-          type="{{type}}"
-          value="{{value}}"
-          id="{{name}}"
-          name="{{name}}"
-          class="{{classNameInput}}"
-          placeholder=""
-          {{#if disabled}}
+<div>
+    <input
+            type="{{type}}"
+            value="{{value}}"
+            id="{{name}}"
+            name="{{name}}"
+            class="{{classNameInput}}"
+            placeholder=""
+        {{#if disabled}}
             disabled={{disabled}}
-          {{/if}}
-        />
+        {{/if}}
+    />
 
-        <label for="{{name}}" class="{{classNamePlaceholder}}">{{placeholder}}</label>
-    </div>
-
-    {{#if error}}
-        <span class="{{classNameError}}">{{error}}</span>
-    {{/if}}
+    <label for="{{name}}" class="{{classNamePlaceholder}}">{{placeholder}}</label>
 </div>
+
+{{#if error}}
+    <span class="{{classNameError}}">{{error}}</span>
+{{/if}}

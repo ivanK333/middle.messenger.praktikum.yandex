@@ -6,13 +6,17 @@ import vite from '../../../static/img/vite.svg';
 import styles from './styles.module.pcss';
 
 export class ChatPreview extends Block<Props> {
+  constructor(props) {
+    super(props, 'li');
+  }
+
   render() {
     const {
       className = '',
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.container} ${className}`,
       classNameHeader: styles.header,
@@ -22,7 +26,7 @@ export class ChatPreview extends Block<Props> {
       classNameMessage: styles.message,
       classNameCount: styles.count,
       classNameWrapper: styles.wrapper,
-      avatar: new Avatar({ src: vite }).render(),
+      avatar: new Avatar({ src: vite }),
     });
   }
 }

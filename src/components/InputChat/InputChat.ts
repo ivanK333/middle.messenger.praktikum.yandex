@@ -11,7 +11,7 @@ export class InputChat extends Block<Props> {
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       type,
       className: `${styles.container} ${className}`,

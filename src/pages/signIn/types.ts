@@ -1,12 +1,5 @@
-import {
-  Input,
-  Button,
-  Link,
-} from '../../components';
+import { Slide } from '../../layouts';
 
 export type Props = {
-  login: Input,
-  password: Input,
-  signIn: Button,
-  signUp: Link,
+  slide: Slide,
 };

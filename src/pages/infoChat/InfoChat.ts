@@ -8,41 +8,40 @@ import {
 import { Slide } from '../../layouts';
 import styles from './styles.module.pcss';
 import { Block } from '../../libs';
+import { InfoChatForm } from '../../forms';
 import { Props } from '.';
+import template from './InfoChat.hbs';
 
 export class InfoChat extends Block<Props> {
   constructor() {
     super({
-      avatar: new AvatarUpload({ className: styles.avatar }),
-      chatName: new Input({
-        name: 'chat_name',
-        placeholder: 'Chat name',
-        className: styles.input,
-        value: 'Chat name',
-        disabled: true,
+      slide: new Slide({
+        buttonBack: new ButtonBack({}),
+        card: new Card({
+          title: 'Info chat',
+          children: new InfoChatForm({
+            avatar: new AvatarUpload({ className: styles.avatar }),
+            chatName: new Input({
+              name: 'chat_name',
+              placeholder: 'Chat name',
+              className: styles.input,
+              value: 'Chat name',
+              disabled: true,
+            }),
+            change: new Button({
+              view: 'default',
+              children: 'Change data',
+              name: 'change',
+            }),
+          }),
+        }),
       }),
-      create: new Button({
-        view: 'default',
-        children: 'Change data',
-        name: 'create',
-      }),
-      buttonBack: new ButtonBack({}),
-    });
+    }, 'main');
   }
 
   render() {
-    const content = `
-    ${this.props.avatar.render()}
-    ${this.props.chatName.render()}
-    ${this.props.create.render()}
-    `;
+    const { className, ...props } = this.props;
 
-    return new Slide({
-      children: new Card({
-        children: content,
-        title: 'Info chat',
-      }).render(),
-      buttonBack: this.props.buttonBack.render(),
-    }).render();
+    return this.compile(template, { ...props, className: `${styles.main} ${className}` });
   }
 }

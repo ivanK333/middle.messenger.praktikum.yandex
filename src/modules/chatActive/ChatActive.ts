@@ -5,18 +5,24 @@ import { Props } from '.';
 import { Block } from '../../libs';
 
 export class ChatActive extends Block<Props> {
+  constructor(props) {
+    super({
+      ...props,
+      header: new HeaderChatActive({ name: 'Vadim' }),
+      messageConsole: new MessageConsole({}),
+    });
+  }
+
   render() {
     const {
       className = '',
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.chatActive} ${className}`,
       classNameChat: styles.chat,
-      header: new HeaderChatActive({ name: 'Vadim' }).render(),
-      messageConsole: new MessageConsole({}).render(),
     });
   }
 }

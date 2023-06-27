@@ -8,22 +8,28 @@ import { Block } from '../../libs';
 import { Props } from '.';
 
 export class HeaderSidebar extends Block<Props> {
+  constructor(props) {
+    super({
+      ...props,
+      search: new InputChat({ img: search, name: 'search', value: '' }),
+      avatar: new Avatar({ src: '' }),
+    });
+  }
+
   render() {
     const {
       className = '',
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.header} ${className}`,
       classNameUserInfo: styles.userInfo,
       classNameButton: styles.button,
       classNameAvatar: styles.avatar,
       classNameName: styles.name,
-      avatar: new Avatar({ src: '' }).render(),
       img: newChat,
-      search: new InputChat({ img: search, name: 'search', value: '' }).render(),
     });
   }
 }

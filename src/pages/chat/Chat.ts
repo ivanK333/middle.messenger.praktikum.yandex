@@ -1,23 +1,24 @@
 import { Sidebar, ChatActive } from '../../modules';
 import { Dashboard } from '../../layouts';
-import { CHATS, MESSAGES } from '../../appConstants';
+import template from './Chat.hbs';
+import { CHATS } from '../../appConstants';
 import { Block } from '../../libs';
 import { Props } from '.';
+import styles from './styles.module.pcss';
 
 export class Chat extends Block<Props> {
   constructor() {
     super({
-      sidebar: new Sidebar({ chats: CHATS }),
-      activeChat: new ChatActive({ messages: MESSAGES }),
-    });
+      dashboard: new Dashboard({
+        sidebar: new Sidebar({ chats: CHATS }),
+        activeChat: new ChatActive({ messages: [] }),
+      }),
+    }, 'main');
   }
 
   render() {
-    const { sidebar, activeChat } = this.props;
+    const { className, ...props } = this.props;
 
-    return new Dashboard({
-      sidebar: sidebar.render(),
-      activeChat: activeChat.render(),
-    }).render();
+    return this.compile(template, { ...props, className: `${styles.main} ${className}` });
   }
 }

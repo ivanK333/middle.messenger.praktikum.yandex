@@ -1,3 +1,7 @@
 export type Props = {
-  children: string | null,
+  children: any,
+  links: any,
+  classNameHeader?: string,
+  classNameNavList?: string,
+  classNameNav?: string,
 };

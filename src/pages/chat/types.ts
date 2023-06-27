@@ -1,6 +1,5 @@
-import { Sidebar, ChatActive } from '../../modules';
+import { Dashboard } from '../../layouts';
 
 export type Props = {
-  sidebar: Sidebar,
-  activeChat: ChatActive,
+  dashboard: Dashboard,
 };

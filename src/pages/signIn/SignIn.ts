@@ -1,59 +1,61 @@
-import styles from './styles.module.pcss';
 import {
-  Input,
   Button,
-  Link,
   Card,
+  Input,
+  Link,
 } from '../../components';
+import { SignInForm } from '../../forms';
+import template from './SignIn.hbs';
 import { ROUTES } from '../../appConstants';
 import { Slide } from '../../layouts';
 import { Block } from '../../libs';
 import { Props } from '.';
+import styles from './styles.module.pcss';
 
 export class SignIn extends Block<Props> {
   constructor() {
     super({
-      login: new Input({
-        type: 'text',
-        name: 'login',
-        placeholder: 'Login',
-        className: styles.login,
-        value: '',
+      slide: new Slide({
+        card: new Card({
+          title: 'Sign in',
+          children: new SignInForm({
+            login: new Input({
+              type: 'text',
+              name: 'login',
+              placeholder: 'Login',
+              className: styles.login,
+              value: '',
+            }),
+            password: new Input({
+              type: 'password',
+              name: 'password',
+              placeholder: 'Password',
+              className: styles.password,
+              value: '',
+            }),
+            signIn: new Button({
+              type: 'button',
+              view: 'default',
+              children: 'Sign in',
+              name: 'sign_in',
+              className: styles.signIn,
+              events: {
+                click: () => console.log(123),
+              },
+            }),
+            signUp: new Link({
+              children: 'Sign up',
+              href: ROUTES.signUp,
+            }),
+          }),
+        }),
       }),
-      password: new Input({
-        type: 'password',
-        name: 'password',
-        placeholder: 'Password',
-        className: styles.password,
-        value: '',
-      }),
-      signIn: new Button({
-        type: 'submit',
-        view: 'default',
-        children: 'Sign in',
-        name: 'sign_in',
-        className: styles.signIn,
-      }),
-      signUp: new Link({
-        children: 'Sign up',
-        href: ROUTES.signUp,
-      }),
-    });
+    }, 'main');
   }
 
   render() {
-    const content = `
-    ${this.props.login.render()}
-    ${this.props.password.render()}
-    ${this.props.signIn.render()}
-    ${this.props.signUp.render()}
-    `;
+    const { className, ...props } = this.props;
 
-    return new Slide({
-      children: new Card({
-        children: content,
-        title: 'Sign in',
-      }).render(),
-    }).render();
+    return this.compile(template, { ...props, className: `${styles.main} ${className}` });
   }
 }

@@ -1,0 +1,10 @@
+@import url("../../styles/_mixins.pcss");
+
+.form {
+  @mixin flexbox;
+  flex-direction: column;
+
+  > :not(:last-child) {
+    margin-bottom: 16px;
+  }
+}

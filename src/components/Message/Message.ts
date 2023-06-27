@@ -5,6 +5,10 @@ import styles from './styles.module.pcss';
 import { Block } from '../../libs';
 
 export class Message extends Block<Props> {
+  constructor(props) {
+    super(props, 'li');
+  }
+
   render() {
     const {
       className = '',
@@ -12,7 +16,7 @@ export class Message extends Block<Props> {
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${isOutgoing ? styles.send : null} ${className}`,
       classNameWrap: styles.wrap,

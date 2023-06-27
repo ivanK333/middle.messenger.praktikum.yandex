@@ -5,6 +5,10 @@ import { Props } from '.';
 import styles from './styles.module.pcss';
 
 export class ButtonSend extends Block<Props> {
+  constructor(props) {
+    super(props, 'button');
+  }
+
   render() {
     const {
       type = 'button',
@@ -12,7 +16,7 @@ export class ButtonSend extends Block<Props> {
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       type,
       className: `${styles.button} ${className}`,

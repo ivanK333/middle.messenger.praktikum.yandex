@@ -1,4 +1,7 @@
+import { Card, ButtonBack } from '../../components';
+
 export type Props = {
-  children: string,
-  buttonBack?: string,
+  card: Card,
+  buttonBack?: ButtonBack,
+  classNameButtonBack?: string,
 };

@@ -11,7 +11,7 @@ export class AvatarUpload extends Block<Props> {
       ...props
     } = this.props;
 
-    return template({
+    return this.compile(template, {
       ...props,
       className: `${styles.container} ${className}`,
       classNameInput: styles.input,

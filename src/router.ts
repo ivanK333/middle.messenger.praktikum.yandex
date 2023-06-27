@@ -14,23 +14,23 @@ import {
 export const router = () => {
   switch (window.location.pathname) {
     case ROUTES.signIn:
-      return new SignIn().render();
+      return new SignIn();
     case ROUTES.signUp:
-      return new SignUp().render();
+      return new SignUp();
     case ROUTES.profile:
-      return new Profile().render();
+      return new Profile();
     case ROUTES.changePassword:
-      return new ChangePassword().render();
+      return new ChangePassword();
     case ROUTES.createChat:
-      return new CreateChat().render();
+      return new CreateChat();
     case ROUTES.infoChat:
-      return new InfoChat().render();
+      return new InfoChat();
     case ROUTES.chat:
-      return new Chat().render();
+      return new Chat();
     case ROUTES.notFound:
-      return new NotFound().render();
+      return new NotFound();
     case ROUTES.internalError:
-      return new InternalError().render();
+      return new InternalError();
 
     default:
       window.location.replace(ROUTES.signIn);

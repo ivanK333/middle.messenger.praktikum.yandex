@@ -8,49 +8,49 @@ import {
 import { Props } from '.';
 import { Block } from '../../libs';
 import { Slide } from '../../layouts';
+import { ChangePasswordForm } from '../../forms';
+import template from './ChangePassword.hbs';
 
 export class ChangePassword extends Block<Props> {
   constructor() {
     super({
-      oldPassword: new Input({
-        name: 'old_password',
-        placeholder: 'Old password',
-        value: '',
+      slide: new Slide({
+        buttonBack: new ButtonBack({}),
+        card: new Card({
+          title: 'Change password',
+          children: new ChangePasswordForm({
+            oldPassword: new Input({
+              name: 'old_password',
+              placeholder: 'Old password',
+              type: 'password',
+              value: '',
+            }),
+            newPassword: new Input({
+              name: 'new_password',
+              placeholder: 'New password',
+              type: 'password',
+              value: '',
+            }),
+            reEnterNewPassword: new Input({
+              name: 're-enter_new_password',
+              placeholder: 'Re-enter new password',
+              type: 'password',
+              value: '',
+            }),
+            save: new Button({
+              view: 'default',
+              children: 'Save',
+              name: 'save',
+            }),
+          }),
+        }),
       }),
-      newPassword: new Input({
-        name: 'new_password',
-        placeholder: 'New password',
-        value: '',
-      }),
-      reEnterNewPassword: new Input({
-        name: 're-enter_new_password',
-        placeholder: 'Re-enter new password',
-        value: '',
-      }),
-      save: new Button({
-        view: 'default',
-        children: 'Save',
-        name: 'save',
-      }),
-      buttonBack: new ButtonBack({}),
-    });
+    }, 'main');
   }
 
   render() {
-    const content = `
-    ${this.props.oldPassword.render()}
-    ${this.props.newPassword.render()}
-    ${this.props.reEnterNewPassword.render()}
-    ${this.props.save.render()}
-    `;
+    const { className, ...props } = this.props;
 
-    return new Slide({
-      children: new Card({
-        children: content,
-        classNameForm: styles.card,
-        title: 'Change password',
-      }).render(),
-      buttonBack: this.props.buttonBack.render(),
-    }).render();
+    return this.compile(template, { ...props, className: `${styles.main} ${className}` });
   }
 }
