@@ -40,17 +40,3 @@ export function isEqual(lhs: PlainObject | unknown[], rhs: PlainObject | unknown
 
   return true;
 }
-
-export function cloneDeep<R>(data: PlainObject | unknown[]): R {
-  const result = data instanceof Array ? [] : {};
-
-  for (const [key, value] of Object.entries(data)) {
-    if (isArray(value) || isObject(value)) {
-      result[key] = cloneDeep(value);
-    } else {
-      result[key] = data[key];
-    }
-  }
-
-  return result as R;
-}

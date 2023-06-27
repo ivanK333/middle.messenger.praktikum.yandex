@@ -18,7 +18,6 @@ export class Sidebar extends Block<Props> {
       ...props
     } = this.props;
 
-    console.log(4, this.props);
     return this.compile(template, {
       ...props,
       className: `${styles.sidebar} ${className}`,

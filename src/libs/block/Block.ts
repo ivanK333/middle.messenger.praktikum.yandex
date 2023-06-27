@@ -14,7 +14,7 @@ export class Block<P extends object = {}> {
 
   private readonly _id: string;
 
-  public children: ChildNode | {};
+  public children: Record<string, Block | Block[]>;
 
   constructor(propsAndChildren: BaseBlockProps<P>, tagName: keyof HTMLElementTagNameMap = 'div') {
     const eventBus = new EventBus();
@@ -60,7 +60,6 @@ export class Block<P extends object = {}> {
             }
           });
           children[key] = childrenArr;
-          props[key] = childrenArr;
           return;
         }
         props[key] = value;
@@ -204,7 +203,7 @@ export class Block<P extends object = {}> {
 
   protected compile(template: (p: BaseBlockProps<P>) => string, props: BaseBlockProps<P>) {
     Object.assign(this.props, props);
-    const propsAndStubs = { ...props };
+    const propsAndStubs = { ...this.props };
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
@@ -217,6 +216,7 @@ export class Block<P extends object = {}> {
         });
 
         propsAndStubs[name] = childArr;
+        return;
       }
       propsAndStubs[name] = `<span data-id="${component.id}"></span>`;
     });
@@ -227,12 +227,23 @@ export class Block<P extends object = {}> {
     fragment.innerHTML = component;
 
     Object.values(this.children).forEach((child) => {
+      let stub;
+
       if (Array.isArray(child)) {
-        console.log(this.props, this.children);
-      }
-      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-      if (stub) {
-        stub.replaceWith(child.getContent());
+        child.forEach((c) => {
+          stub = fragment.content.querySelector(`[data-id="${c.id}"]`);
+
+          if (stub) {
+            stub.replaceWith(c.getContent());
+          }
+          console.log(stub, c.getContent());
+        });
+      } else {
+        stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+
+        if (stub) {
+          stub.replaceWith(child.getContent());
+        }
       }
     });
 
