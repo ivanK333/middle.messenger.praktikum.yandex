@@ -14,13 +14,8 @@ export class Block<P extends object = {}> {
 
   private readonly _id: string;
 
-  public children: Record<string, Block | Block[]>;
-
-  constructor(propsAndChildren: BaseBlockProps<P>, tagName: keyof HTMLElementTagNameMap = 'div') {
+  constructor(props: BaseBlockProps<P>, tagName: keyof HTMLElementTagNameMap = 'div') {
     const eventBus = new EventBus();
-    const { children, props } = this._getChildren(propsAndChildren);
-
-    this.children = children;
 
     this._meta = {
       tagName,
@@ -41,32 +36,6 @@ export class Block<P extends object = {}> {
 
   get id(): string | null {
     return this._id;
-  }
-
-  private _getChildren(propsAndChildren: BaseBlockProps<P>) {
-    const children = {};
-    const props = {};
-
-    Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
-        children[key] = value;
-      }
-
-      if (Array.isArray(value)) {
-        const childArr = [];
-        value.forEach((child) => {
-          if (child instanceof Block) {
-            childArr.push(child);
-          }
-        });
-
-        children[key] = childArr;
-      }
-
-      props[key] = value;
-    });
-
-    return { children, props };
   }
 
   private _registerEvents(eventBus: EventBus) {
@@ -195,46 +164,37 @@ export class Block<P extends object = {}> {
     });
   }
 
-  protected compile(template: (p: BaseBlockProps<P>) => string, props: BaseBlockProps<P>) {
-    Object.assign(this.props, props);
-    const propsAndStubs = { ...props };
+  protected compile(template: (p: BaseBlockProps<P>) => string, p: BaseBlockProps<P>) {
+    Object.assign(this.props, p);
 
-    Object.entries(this.children).forEach(([name, component]) => {
-      if (Array.isArray(component)) {
-        const componentArr = [];
-        component.forEach((child) => {
-          componentArr.push(`<div data-id="${child.id}"></div>`);
+    const children = [];
+    const props = p;
+
+    Object.keys(props).forEach((key) => {
+      if (props[key] instanceof Block) {
+        children.push(props[key]);
+        props[key] = `<span data-id="${props[key].id}"></span>`;
+      }
+
+      if (Array.isArray(props[key])) {
+        props[key].forEach((el, index) => {
+          if (el instanceof Block) {
+            children.push(el);
+            props[key][index] = `<span data-id="${props[key][index].id}"></span>`;
+          }
         });
-
-        propsAndStubs[name] = componentArr;
-      } else {
-        propsAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
     });
 
     const fragment = document.createElement('template');
 
-    fragment.innerHTML = template(propsAndStubs);
+    fragment.innerHTML = template(props);
 
-    Object.values(this.children).forEach((component) => {
-      if (Array.isArray(component)) {
-        component.forEach((child) => {
-          const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+    children.forEach((child) => {
+      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
 
-          console.log(stub);
-          console.log(child);
-          if (stub) {
-            stub.replaceWith(child.getContent());
-          }
-        });
-        console.log(0, component);
-      } else {
-        console.log(1, component);
-        const stub = fragment.content.querySelector(`[data-id="${component.id}"]`);
-
-        if (stub) {
-          stub.replaceWith(component.getContent());
-        }
+      if (stub) {
+        stub.replaceWith(child.getContent());
       }
     });
 
