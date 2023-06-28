@@ -1,7 +1,7 @@
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from '../event-bus';
 import { BaseBlockProps, Meta, EVENTS } from './types';
-import { useAccessCheck, isEqual, PlainObject } from '../../utils';
+import { useAccessCheck } from '../../utils';
 
 export class Block<P extends object = {}> {
   public props: BaseBlockProps<P>;
@@ -50,20 +50,20 @@ export class Block<P extends object = {}> {
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
         children[key] = value;
-      } else {
-        if (Array.isArray(value)) {
-          const childrenArr = [];
-
-          value.forEach((el) => {
-            if (el instanceof Block) {
-              childrenArr.push(el);
-            }
-          });
-          children[key] = childrenArr;
-          return;
-        }
-        props[key] = value;
       }
+
+      if (Array.isArray(value)) {
+        const childArr = [];
+        value.forEach((child) => {
+          if (child instanceof Block) {
+            childArr.push(child);
+          }
+        });
+
+        children[key] = childArr;
+      }
+
+      props[key] = value;
     });
 
     return { children, props };
@@ -82,9 +82,7 @@ export class Block<P extends object = {}> {
   }
 
   private _createDocumentElement(tagName) {
-    const element = document.createElement(tagName);
-    element.setAttribute('data-id', this._id);
-    return element;
+    return document.createElement(tagName);
   }
 
   public init() {}
@@ -106,20 +104,16 @@ export class Block<P extends object = {}> {
     this.eventBus().emit(EVENTS.cdm);
   }
 
-  private _componentDidUpdate(oldProps: P, newProps: P) {
-    const response = this.componentDidUpdate(oldProps, newProps);
+  private _componentDidUpdate() {
+    const response = this.componentDidUpdate();
 
     if (response) {
       this.eventBus().emit(EVENTS.render);
     }
   }
 
-  public componentDidUpdate(oldProps: P, newProps: P) {
-    if (oldProps && newProps) {
-      return !isEqual(oldProps as PlainObject, newProps as PlainObject);
-    }
-
-    return false;
+  public componentDidUpdate() {
+    return true;
   }
 
   public setProps = (nextProps: Partial<BaseBlockProps<P>>) => {
@@ -138,20 +132,20 @@ export class Block<P extends object = {}> {
   private _render() {
     const block = this.render();
 
-    if (block) {
-      this._removeEvents();
-      this._element.innerHTML = '';
-      this._element.appendChild(block);
+    this._removeEvents();
+    this._element.innerHTML = '';
+    this._element.appendChild(block);
 
-      const { className } = this.props;
-      if (className) {
-        this._element.className = className;
-      }
-      this._addEvents();
+    const { className } = this.props;
+    if (className) {
+      this._element.className = className;
     }
+    this._addEvents();
   }
 
-  protected render(): DocumentFragment | void {}
+  protected render(): DocumentFragment {
+    return new DocumentFragment();
+  }
 
   public getContent() {
     return this.element;
@@ -203,46 +197,43 @@ export class Block<P extends object = {}> {
 
   protected compile(template: (p: BaseBlockProps<P>) => string, props: BaseBlockProps<P>) {
     Object.assign(this.props, props);
-    const propsAndStubs = { ...this.props };
+    const propsAndStubs = { ...props };
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
-        const childArr = [];
-
+        const componentArr = [];
         component.forEach((child) => {
-          if (child instanceof Block) {
-            childArr.push(`<span data-id="${child.id}"></span>`);
-          }
+          componentArr.push(`<div data-id="${child.id}"></div>`);
         });
 
-        propsAndStubs[name] = childArr;
-        return;
+        propsAndStubs[name] = componentArr;
+      } else {
+        propsAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
-      propsAndStubs[name] = `<span data-id="${component.id}"></span>`;
     });
 
     const fragment = document.createElement('template');
 
-    const component = template(propsAndStubs);
-    fragment.innerHTML = component;
+    fragment.innerHTML = template(propsAndStubs);
 
-    Object.values(this.children).forEach((child) => {
-      let stub;
+    Object.values(this.children).forEach((component) => {
+      if (Array.isArray(component)) {
+        component.forEach((child) => {
+          const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
 
-      if (Array.isArray(child)) {
-        child.forEach((c) => {
-          stub = fragment.content.querySelector(`[data-id="${c.id}"]`);
-
+          console.log(stub);
+          console.log(child);
           if (stub) {
-            stub.replaceWith(c.getContent());
+            stub.replaceWith(child.getContent());
           }
-          console.log(stub, c.getContent());
         });
+        console.log(0, component);
       } else {
-        stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+        console.log(1, component);
+        const stub = fragment.content.querySelector(`[data-id="${component.id}"]`);
 
         if (stub) {
-          stub.replaceWith(child.getContent());
+          stub.replaceWith(component.getContent());
         }
       }
     });

@@ -7,3 +7,12 @@
 - `npm run build` - сборка проекта;
 - `npm run dev` - запуск локально для разработки;
 - `npm run start` - запуск сервера node.js;
+- `npm run type-check` - проверка ошибок типизации (typescript);
+- `eslint-fix` - исправление ошибок eslint;
+- `stylelint-fix` - исправление ошибок stylelint;
+
+
+### Description
+
+- В проекте используется [typescript](https://www.typescriptlang.org/), конфигурации и описание правил можно увидеть в корневом файле ```tsconfig.json```
+- Для единого стиля написания кода используются такие технологии как [eslint](https://eslint.org/) и [stylelint](https://stylelint.io/), c конфигурации можно ознакомиться в корневыйх файлах ```.eslintrc.cjs``` и ```.stylelintrc.json``` 

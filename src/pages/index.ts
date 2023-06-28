@@ -7,3 +7,4 @@ export { InfoChat } from './infoChat';
 export { Chat } from './chat';
 export { NotFound } from './notFound';
 export { InternalError } from './internalError';
+export { Test } from './Test';

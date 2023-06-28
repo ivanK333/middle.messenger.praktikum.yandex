@@ -1,3 +1,5 @@
+import { queryStringify } from '../../utils';
+
 const METHODS = {
   GET: 'GET',
   POST: 'POST',
@@ -5,27 +7,20 @@ const METHODS = {
   PUT: 'PUT',
 };
 
-/**
- * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
- * На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
- * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
- */
-function queryStringify(data) {
-  const result = Object.entries(data).map(([key, value]) => `${key}=${value.toString()}`);
-  return `${result.join('&')}`;
-  // Можно делать трансформацию GET-параметров в отдельной функции
-}
-class HTTPTransport {
+export class Fetch {
   request = (path, options) => {
     const {
-      method, data, headers, timeout,
+      method,
+      data,
+      headers,
+      timeout,
     } = options;
 
     const isGet = method === METHODS.GET;
 
     let query = '';
 
-    if (isGet) {
+    if (data && isGet) {
       query = queryStringify(data);
     }
 
@@ -49,7 +44,7 @@ class HTTPTransport {
         });
       }
 
-      if (isGet) {
+      if (isGet || !data) {
         xhr.send();
       } else {
         xhr.send(data);

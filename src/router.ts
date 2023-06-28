@@ -9,6 +9,7 @@ import {
   Chat,
   NotFound,
   InternalError,
+  Test,
 } from './pages';
 
 export const router = () => {
@@ -31,6 +32,8 @@ export const router = () => {
       return new NotFound();
     case ROUTES.internalError:
       return new InternalError();
+    case ROUTES.test:
+      return new Test();
 
     default:
       window.location.replace(ROUTES.signIn);
