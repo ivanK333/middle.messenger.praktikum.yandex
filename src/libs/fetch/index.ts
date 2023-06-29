@@ -1,1 +1,1 @@
-export { Fetch } from './fetch';
+export { Fetch } from './Fetch';

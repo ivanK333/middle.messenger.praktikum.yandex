@@ -11,7 +11,7 @@ export class HeaderSidebar extends Block<Props> {
   constructor(props) {
     super({
       ...props,
-      search: new InputChat({ img: search, name: 'search', value: '' }),
+      search: new InputChat({ img: search, name: 'search' }),
       avatar: new Avatar({ src: '' }),
     });
   }

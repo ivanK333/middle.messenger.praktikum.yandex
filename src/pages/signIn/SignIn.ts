@@ -24,24 +24,19 @@ export class SignIn extends Block<Props> {
               name: 'login',
               placeholder: 'Login',
               className: styles.login,
-              value: '',
             }),
             password: new Input({
               type: 'password',
               name: 'password',
               placeholder: 'Password',
               className: styles.password,
-              value: '',
             }),
             signIn: new Button({
-              type: 'button',
+              type: 'submit',
               view: 'default',
               children: 'Sign in',
               name: 'sign_in',
               className: styles.signIn,
-              events: {
-                click: () => console.log(123),
-              },
             }),
             signUp: new Link({
               children: 'Sign up',

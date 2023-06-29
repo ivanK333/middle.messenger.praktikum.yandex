@@ -25,37 +25,31 @@ export class Profile extends Block<Props> {
             email: new Input({
               name: 'email',
               placeholder: 'email',
-              value: 'qwe@qwe.com',
               disabled: true,
             }),
             login: new Input({
               name: 'login',
               placeholder: 'Login',
-              value: 'IvanIvanov',
               disabled: true,
             }),
             firstName: new Input({
               name: 'first_name',
               placeholder: 'First name',
-              value: 'Ivan',
               disabled: true,
             }),
             secondName: new Input({
               name: 'second_name',
               placeholder: 'Second name',
-              value: 'Ivanov',
               disabled: true,
             }),
             phone: new Input({
               name: 'phone',
               placeholder: 'Phone',
-              value: '234342342342',
               disabled: true,
             }),
             chatName: new Input({
               name: 'chat_name',
               placeholder: 'Chat name',
-              value: 'Ivan_chat_name',
               disabled: true,
             }),
             changeData: new Button({

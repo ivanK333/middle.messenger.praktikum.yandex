@@ -12,8 +12,7 @@ export class Test extends Block<Props> {
         type: 'button',
         children: 'fetch',
         events: {
-          // eslint-disable-next-line consistent-return
-          click: async () => {},
+          click: () => {},
         },
       }),
     });

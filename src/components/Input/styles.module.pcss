@@ -1,10 +1,6 @@
 @import url("../../styles/_mixins.pcss");
 @import url("../../styles/_variables.pcss");
 
-.container {
-  position: relative;
-  width: 100%;
-}
 
 .placeholder {
   @mixin typography-text-m;
@@ -14,10 +10,6 @@
   left: 12px;
   top: 6px;
   transition: color $default-transition-ms $default-transition-easing;
-}
-
-.input:not(:disabled) + .errorPlaceholder {
-  color: $color-text-error;
 }
 
 .input {
@@ -37,15 +29,11 @@
   }
 
   &:not(:disabled) {
-    &.errorInput {
-      border-color: $color-text-error;
-    }
-
-    &:not(.errorInput):hover + .placeholder {
+    &:hover + .placeholder {
       color: $color-text-grey;
     }
 
-    &:not(.errorInput):focus + .placeholder {
+    &:focus + .placeholder {
       color: $color-text-secondary;
     }
   }
@@ -53,8 +41,31 @@
 
 .text {
   @mixin typography-text-m;
+}
 
-  &.errorText {
-    color: $color-text-error;
+.container {
+  position: relative;
+  width: 100%;
+
+  &.error {
+    .input:not(:disabled) {
+      border-color: $color-text-error;
+
+      &:hover + .placeholder {
+        color: $color-text-error;
+      }
+
+      &:focus + .placeholder {
+        color: $color-text-error;
+      }
+
+      + .placeholder {
+        color: $color-text-error;
+      }
+    }
+
+    .text {
+      color: $color-text-error;
+    }
   }
 }

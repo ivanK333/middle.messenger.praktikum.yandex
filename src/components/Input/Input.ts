@@ -12,13 +12,15 @@ export class Input extends Block<Props> {
       ...props
     } = this.props;
 
+    this.getContent().setAttribute('id', 'input');
+
     return this.compile(template, {
       ...props,
       type,
-      className: `${styles.container} ${className}`,
-      classNamePlaceholder: `${styles.placeholder} ${error ? styles.errorPlaceholder : ''}`,
-      classNameError: `${styles.text} ${error ? styles.errorText : ''}`,
-      classNameInput: `${styles.input} ${error ? styles.errorInput : ''}`,
+      className: `${styles.container} ${error ? styles.error : ''} ${className}`,
+      classNamePlaceholder: styles.placeholder,
+      classNameError: styles.text,
+      classNameInput: styles.input,
       error,
     });
   }

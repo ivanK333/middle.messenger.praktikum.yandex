@@ -25,7 +25,6 @@ export class InfoChat extends Block<Props> {
               name: 'chat_name',
               placeholder: 'Chat name',
               className: styles.input,
-              value: 'Chat name',
               disabled: true,
             }),
             change: new Button({

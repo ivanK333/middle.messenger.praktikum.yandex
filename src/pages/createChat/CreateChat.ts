@@ -25,7 +25,6 @@ export class CreateChat extends Block<Props> {
               name: 'chat_name',
               placeholder: 'Chat name',
               className: styles.input,
-              value: 'Chat name',
             }),
             create: new Button({
               view: 'default',

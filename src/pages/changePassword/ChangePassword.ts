@@ -23,19 +23,16 @@ export class ChangePassword extends Block<Props> {
               name: 'old_password',
               placeholder: 'Old password',
               type: 'password',
-              value: '',
             }),
             newPassword: new Input({
               name: 'new_password',
               placeholder: 'New password',
               type: 'password',
-              value: '',
             }),
             reEnterNewPassword: new Input({
               name: 're-enter_new_password',
               placeholder: 'Re-enter new password',
               type: 'password',
-              value: '',
             }),
             save: new Button({
               view: 'default',

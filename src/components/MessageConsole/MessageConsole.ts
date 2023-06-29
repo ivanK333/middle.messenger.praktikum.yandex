@@ -14,7 +14,6 @@ export class MessageConsole extends Block<Props> {
         placeholder: 'Message',
         className: styles.input,
         name: 'message',
-        value: '',
       }),
       button: new ButtonSend({}),
     }, 'form');

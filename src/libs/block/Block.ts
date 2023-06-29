@@ -110,6 +110,7 @@ export class Block<P extends object = {}> {
       this._element.className = className;
     }
     this._addEvents();
+    this.eventBus().emit(EVENTS.cdm);
   }
 
   protected render(): DocumentFragment {
