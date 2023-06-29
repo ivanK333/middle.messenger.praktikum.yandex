@@ -7,7 +7,7 @@ import { Props } from '.';
 import { Block } from '../../libs';
 
 export class MessageConsole extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super({
       ...props,
       input: new InputChat({

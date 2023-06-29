@@ -6,7 +6,7 @@ import styles from './styles.module.pcss';
 import { Block } from '../../libs';
 
 export class HeaderChatActive extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super({
       ...props,
       avatar: new Avatar({ src: vite }),

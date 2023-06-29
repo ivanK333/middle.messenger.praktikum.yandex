@@ -20,22 +20,23 @@ export class ChangePassword extends Block<Props> {
           title: 'Change password',
           children: new ChangePasswordForm({
             oldPassword: new Input({
-              name: 'old_password',
+              name: 'oldPassword',
               placeholder: 'Old password',
               type: 'password',
             }),
             newPassword: new Input({
-              name: 'new_password',
+              name: 'newPassword',
               placeholder: 'New password',
               type: 'password',
             }),
             reEnterNewPassword: new Input({
-              name: 're-enter_new_password',
+              name: 'reEnterNewPassword',
               placeholder: 'Re-enter new password',
               type: 'password',
             }),
             save: new Button({
               view: 'default',
+              type: 'submit',
               children: 'Save',
               name: 'save',
             }),

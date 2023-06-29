@@ -22,12 +22,13 @@ export class CreateChat extends Block<Props> {
           children: new CreateChatForm({
             avatar: new AvatarUpload({ className: styles.avatar }),
             chatName: new Input({
-              name: 'chat_name',
+              name: 'chatName',
               placeholder: 'Chat name',
               className: styles.input,
             }),
             create: new Button({
               view: 'default',
+              type: 'submit',
               children: 'Create',
               name: 'create',
             }),

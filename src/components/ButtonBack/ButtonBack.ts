@@ -5,7 +5,7 @@ import { Props } from '.';
 import styles from './styles.module.pcss';
 
 export class ButtonBack extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props, 'button');
   }
 

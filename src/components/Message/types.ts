@@ -6,6 +6,6 @@ export type Props = {
   classNameInfo?: string,
   isOutgoing?: boolean,
   message: string,
-  check: string,
+  check?: string,
   date: string,
 };

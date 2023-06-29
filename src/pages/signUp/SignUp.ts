@@ -29,11 +29,11 @@ export class SignUp extends Block<Props> {
               placeholder: 'Login',
             }),
             firstName: new Input({
-              name: 'first_name',
+              name: 'firstName',
               placeholder: 'First name',
             }),
             secondName: new Input({
-              name: 'second_name',
+              name: 'secondName',
               placeholder: 'Second name',
             }),
             phone: new Input({
@@ -47,7 +47,7 @@ export class SignUp extends Block<Props> {
             }),
             repeatPassword: new Input({
               type: 'password',
-              name: 'repeat_password',
+              name: 'repeatPassword',
               placeholder: 'Repeat password',
             }),
             signUp: new Button({

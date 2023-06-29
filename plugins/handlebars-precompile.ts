@@ -5,6 +5,9 @@ export default function handlebarsPrecompile() {
 
   return {
     name: 'vite-plugin-handlebars-precompile',
+    /**
+     The type of any library uses handlebars
+     */
     transform(src: any, id: string): string | undefined {
       if (!fileRegexp.test(id)) {
         return undefined;

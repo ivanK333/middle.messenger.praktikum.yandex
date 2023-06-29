@@ -5,6 +5,15 @@ import {
   AvatarUpload,
 } from '../../components';
 
+export type Values = {
+  email: string,
+  login: string,
+  firstName: string,
+  secondName: string,
+  phone: string,
+  chatName: string,
+};
+
 export type Props = {
   avatar: AvatarUpload,
   email: Input,
@@ -12,8 +21,8 @@ export type Props = {
   firstName: Input,
   secondName: Input,
   phone: Input,
-  password: Input,
-  repeatPassword: Input,
-  signUp: Button,
-  signIn: Link,
+  chatName: Input,
+  save: Button,
+  changePassword: Link,
+  logOut: Link,
 };

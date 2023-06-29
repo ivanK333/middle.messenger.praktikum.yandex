@@ -8,7 +8,7 @@ import { Block } from '../../libs';
 import { Props } from '.';
 
 export class HeaderSidebar extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super({
       ...props,
       search: new InputChat({ img: search, name: 'search' }),

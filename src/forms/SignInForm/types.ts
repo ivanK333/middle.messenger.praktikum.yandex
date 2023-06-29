@@ -1,7 +1,11 @@
 import { Input, Button, Link } from '../../components';
 
+export type Values = {
+  password: string,
+  login: string
+};
+
 export type Props = {
-  event: Record<keyof WindowEventMap, (e: any) => any>,
   login: Input,
   password: Input,
   signIn: Button,

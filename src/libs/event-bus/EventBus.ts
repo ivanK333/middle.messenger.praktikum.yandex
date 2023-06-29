@@ -23,6 +23,9 @@ export class EventBus {
     );
   }
 
+  /**
+   arguments can be in any quantity and of any type
+   */
   emit(event: string, ...arg: any[]) {
     if (!this.listeners[event]) {
       throw new Error(`Unknown event: ${event}`);

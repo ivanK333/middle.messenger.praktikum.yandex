@@ -4,7 +4,7 @@ import { Props } from '.';
 import { Block } from '../../libs';
 
 export class Link extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props, 'a');
   }
 

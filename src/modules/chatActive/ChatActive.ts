@@ -5,7 +5,7 @@ import { Props } from '.';
 import { Block } from '../../libs';
 
 export class ChatActive extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super({
       ...props,
       header: new HeaderChatActive({ name: 'Vadim' }),

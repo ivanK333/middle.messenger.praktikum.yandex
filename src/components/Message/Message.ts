@@ -5,7 +5,7 @@ import styles from './styles.module.pcss';
 import { Block } from '../../libs';
 
 export class Message extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props, 'li');
   }
 

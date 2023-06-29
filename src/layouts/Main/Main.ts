@@ -5,7 +5,7 @@ import styles from './styles.module.pcss';
 import { LINKS } from '../../appConstants';
 
 export class Main extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props, 'main');
   }
 

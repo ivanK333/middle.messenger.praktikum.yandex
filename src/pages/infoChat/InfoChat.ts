@@ -13,6 +13,8 @@ import { Props } from '.';
 import template from './InfoChat.hbs';
 
 export class InfoChat extends Block<Props> {
+  public isChangeData: boolean;
+
   constructor() {
     super({
       slide: new Slide({
@@ -22,15 +24,15 @@ export class InfoChat extends Block<Props> {
           children: new InfoChatForm({
             avatar: new AvatarUpload({ className: styles.avatar }),
             chatName: new Input({
-              name: 'chat_name',
+              name: 'chatName',
               placeholder: 'Chat name',
               className: styles.input,
-              disabled: true,
             }),
-            change: new Button({
+            save: new Button({
               view: 'default',
-              children: 'Change data',
-              name: 'change',
+              type: 'submit',
+              children: 'Save',
+              name: 'save',
             }),
           }),
         }),

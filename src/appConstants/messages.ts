@@ -24,44 +24,11 @@ const data = {
 };
 
 export const MESSAGES = [
-  {
-    id: '0',
-    message: new Message({ ...data, isOutgoing: true }),
-  },
-  {
-    id: '1',
-    message: new Message(data),
-  },
-  {
-    id: '2',
-    message: new Message(data),
-  },
-  {
-    id: '3',
-    message: new Message(data),
-  },
-  {
-    id: '4',
-    message: new Message({ ...data, isOutgoing: true }),
-  },
-  {
-    id: '5',
-    message: new Message(data),
-  },
-  {
-    id: '6',
-    message: new Message({ ...data, isOutgoing: true }),
-  },
-  {
-    id: '7',
-    message: new Message(data),
-  },
-  {
-    id: '8',
-    message: new Message(data),
-  },
-  {
-    id: '9',
-    message: new Message({ ...data, isOutgoing: true }),
-  },
+  new Message({ ...data, isOutgoing: true }),
+  new Message({ ...data }),
+  new Message({ ...data, isOutgoing: true }),
+  new Message({ ...data, isOutgoing: true }),
+  new Message({ ...data }),
+  new Message({ ...data, isOutgoing: true }),
+  new Message({ ...data }),
 ];

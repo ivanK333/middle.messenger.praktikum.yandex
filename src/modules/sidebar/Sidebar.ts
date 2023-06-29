@@ -5,7 +5,7 @@ import { Block } from '../../libs';
 import { HeaderSidebar } from '../../components';
 
 export class Sidebar extends Block<Props> {
-  constructor(props) {
+  constructor(props: Props) {
     super({
       ...props,
       header: new HeaderSidebar({ name: 'ivan' }),

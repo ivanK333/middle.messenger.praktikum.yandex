@@ -1,6 +1,10 @@
 import { v4 as makeUUID } from 'uuid';
 import { EventBus } from '../event-bus';
-import { BaseBlockProps, Meta, EVENTS } from './types';
+import {
+  BaseBlockProps,
+  Meta,
+  EVENTS,
+} from './types';
 import { useAccessCheck } from '../../utils';
 
 export class Block<P extends object = {}> {
@@ -24,7 +28,6 @@ export class Block<P extends object = {}> {
 
     this._id = makeUUID();
 
-    // @ts-ignore
     this.props = this._makePropsProxy({ ...props, __id: this._id });
 
     this.eventBus = () => eventBus;
@@ -50,7 +53,7 @@ export class Block<P extends object = {}> {
     this._element = this._createDocumentElement(tagName);
   }
 
-  private _createDocumentElement(tagName) {
+  private _createDocumentElement(tagName: keyof HTMLElementTagNameMap) {
     return document.createElement(tagName);
   }
 
@@ -121,7 +124,7 @@ export class Block<P extends object = {}> {
     return this.element;
   }
 
-  private _makePropsProxy(props: BaseBlockProps<P> | {}) {
+  private _makePropsProxy(props: BaseBlockProps<P>) {
     return new Proxy(props, {
       get(target, prop) {
         const isAccessGranted = useAccessCheck(prop);
@@ -129,9 +132,12 @@ export class Block<P extends object = {}> {
           throw new Error('No access');
         }
 
-        const value = target[prop];
+        if (prop in target) {
+          const value = target[prop];
 
-        return typeof value === 'function' ? value.bind(target) : value;
+          return typeof value === 'function' ? value.bind(target) : value;
+        }
+        return null;
       },
 
       set(target, prop, value) {
@@ -141,7 +147,7 @@ export class Block<P extends object = {}> {
           throw new Error('No access');
         }
         // eslint-disable-next-line no-param-reassign
-        target[prop] = value;
+        target[prop as keyof P] = value;
         return true;
       },
 
@@ -153,6 +159,9 @@ export class Block<P extends object = {}> {
 
   private _removeEvents() {
     const { events = {} } = this.props;
+    console.log(events);
+    if (!events) return;
+    console.log(events);
     Object.keys(events).forEach((name) => {
       this._element.removeEventListener(name, events[name]);
     });
@@ -160,6 +169,7 @@ export class Block<P extends object = {}> {
 
   private _addEvents() {
     const { events = {} } = this.props;
+    if (!events) return;
     Object.keys(events).forEach((name) => {
       this._element.addEventListener(name, events[name]);
     });
@@ -168,16 +178,16 @@ export class Block<P extends object = {}> {
   protected compile(template: (p: BaseBlockProps<P>) => string, p: BaseBlockProps<P>) {
     Object.assign(this.props, p);
 
-    const children = [];
+    const children: Block[] | HTMLSpanElement = [];
     const props = p;
 
     Object.keys(props).forEach((key) => {
-      if (props[key] instanceof Block) {
+      if (props[key as keyof BaseBlockProps<P>] instanceof Block) {
         children.push(props[key]);
-        props[key] = `<span data-id="${props[key].id}"></span>`;
+        props[key] = `<span data-id="${(props[key]).id}"></span>`;
       }
 
-      if (Array.isArray(props[key])) {
+      if (Array.isArray(props[key as keyof BaseBlockProps<P>])) {
         props[key].forEach((el, index) => {
           if (el instanceof Block) {
             children.push(el);
@@ -192,7 +202,7 @@ export class Block<P extends object = {}> {
     fragment.innerHTML = template(props);
 
     children.forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`) as HTMLTemplateElement;
 
       if (stub) {
         stub.replaceWith(child.getContent());

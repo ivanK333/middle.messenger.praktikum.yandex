@@ -18,5 +18,6 @@ module.exports = {
     'max-len': ['error', { code: 125 }],
     'class-methods-use-this': 0,
     '@typescript-eslint/no-unused-expressions': 0,
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }]
   },
 };

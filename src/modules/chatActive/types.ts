@@ -1,13 +1,8 @@
-import { HeaderChatActive, MessageConsole } from '../../components';
-
-export type message = {
-  id: string,
-  message: string,
-};
+import { HeaderChatActive, MessageConsole, Message } from '../../components';
 
 export type Props = {
   classNameChat?: string;
   header?: HeaderChatActive;
   messageConsole?: MessageConsole;
-  messages: message[];
+  messages: Message[];
 };

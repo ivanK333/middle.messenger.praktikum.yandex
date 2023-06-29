@@ -1,8 +1,11 @@
 import { Props, InputContainer } from '.';
+import { Rule } from '../../appConstants/validation';
 import styles from '../../components/Input/styles.module.pcss';
 
 export class FormValidator<V extends object = {}> {
   public form: HTMLFormElement;
+
+  private fields: Record<keyof V, Rule[]>;
 
   private values: V;
 
@@ -17,6 +20,7 @@ export class FormValidator<V extends object = {}> {
 
     this.inputContainers = inputContainers;
 
+    this.fields = props.fields;
     this.values = values as V;
 
     this.onSubmit = props.onSubmit;
@@ -48,23 +52,48 @@ export class FormValidator<V extends object = {}> {
   }
 
   private _validate() {
+    let errors = {};
     this.inputContainers.forEach((inputContainer) => {
-      this._validateInput(inputContainer);
+      const testResult = this._validateInput(inputContainer);
+      errors = { ...errors, ...testResult };
     });
+
+    return Object.keys(errors).length <= 0;
   }
 
-  private _validateInput(inputContainer: InputContainer): void {
-    const input = inputContainer.querySelector('input');
-    if (!input.value) {
-      inputContainer.classList.add(styles.error);
-    } else {
+  private _validateInput(inputContainer: InputContainer): Record<keyof V, string> | {} {
+    const input = inputContainer.querySelector('input') as HTMLInputElement;
+    // const errorContainer = inputContainer.querySelector('span');
+    const fieldRules: Rule[] = this.fields[input.name as keyof V];
+    let error: Record<keyof V, string> | {} = {};
+
+    for (let i = 0; i < fieldRules.length; i++) {
+      if (!fieldRules[i].rule.test(input.value)) {
+        inputContainer.classList.add(styles.error);
+        error = { ...error, [input.name]: fieldRules[i].message };
+        break;
+      }
+
+      if (fieldRules[i].isEqualBy) {
+        const referenceContainer = this.inputContainers.filter((containers) => (
+          (containers.querySelector('input') as HTMLInputElement).name === fieldRules[i].isEqualBy
+        ))[0] as HTMLInputElement;
+
+        const referenceInput = referenceContainer.querySelector('input') as HTMLInputElement;
+        if (referenceInput.value !== input.value) {
+          inputContainer.classList.add(styles.error);
+          error = { ...error, [input.name]: fieldRules[i].message };
+        }
+        return error;
+      }
       inputContainer.classList.remove(styles.error);
     }
+    return error;
   }
 
   private _registerInputEvents() {
     this.inputContainers.forEach((inputContainer) => {
-      const input = inputContainer.querySelector('input');
+      const input = inputContainer.querySelector('input') as HTMLInputElement;
       input.addEventListener('blur', () => {
         this._validateInput(inputContainer);
       });
@@ -81,7 +110,7 @@ export class FormValidator<V extends object = {}> {
   private _detach() {
     this.form.removeEventListener('submit', (e) => this._handleSubmit(e));
     this.inputContainers.forEach((inputContainer) => {
-      const input = inputContainer.querySelector('input');
+      const input = inputContainer.querySelector('input') as HTMLInputElement;
 
       input.removeEventListener('blur', () => this._validateInput(input));
       input.removeEventListener('input', () => this._validateInput(input));
@@ -91,8 +120,10 @@ export class FormValidator<V extends object = {}> {
   private _handleSubmit(e: Event) {
     e.preventDefault();
 
-    this._validate();
+    const isValid = this._validate();
 
-    this.onSubmit(this.values);
+    if (isValid) {
+      this.onSubmit(this.values);
+    }
   }
 }
