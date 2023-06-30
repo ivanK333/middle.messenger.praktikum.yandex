@@ -8,21 +8,21 @@ import {
 export type Values = {
   email: string,
   login: string,
-  firstName: string,
-  secondName: string,
+  first_name: string,
+  second_name: string,
   phone: string,
-  chatName: string,
+  display_name: string,
 };
 
 export type Props = {
   avatar: AvatarUpload,
   email: Input,
   login: Input,
-  firstName: Input,
-  secondName: Input,
+  first_name: Input,
+  second_name: Input,
   phone: Input,
-  chatName: Input,
+  display_name: Input,
   save: Button,
-  changePassword: Link,
-  logOut: Link,
+  change_password: Link,
+  log_out: Link,
 };

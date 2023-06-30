@@ -30,20 +30,20 @@ export class Profile extends Block<Props> {
               name: 'login',
               placeholder: 'Login',
             }),
-            firstName: new Input({
-              name: 'firstName',
+            first_name: new Input({
+              name: 'first_name',
               placeholder: 'First name',
             }),
-            secondName: new Input({
-              name: 'secondName',
+            second_name: new Input({
+              name: 'second_name',
               placeholder: 'Second name',
             }),
             phone: new Input({
               name: 'phone',
               placeholder: 'Phone',
             }),
-            chatName: new Input({
-              name: 'chatName',
+            display_name: new Input({
+              name: 'display_name',
               placeholder: 'Chat name',
             }),
             save: new Button({
@@ -52,11 +52,11 @@ export class Profile extends Block<Props> {
               name: 'save',
               type: 'submit',
             }),
-            changePassword: new Link({
+            change_password: new Link({
               children: 'Change password',
               href: ROUTES.changePassword,
             }),
-            logOut: new Link({
+            log_out: new Link({
               children: 'Log out',
               color: 'red',
               href: ROUTES.signIn,

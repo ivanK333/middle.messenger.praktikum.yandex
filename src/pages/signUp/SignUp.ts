@@ -28,12 +28,12 @@ export class SignUp extends Block<Props> {
               name: 'login',
               placeholder: 'Login',
             }),
-            firstName: new Input({
-              name: 'firstName',
+            first_name: new Input({
+              name: 'first_name',
               placeholder: 'First name',
             }),
-            secondName: new Input({
-              name: 'secondName',
+            second_name: new Input({
+              name: 'second_name',
               placeholder: 'Second name',
             }),
             phone: new Input({
@@ -45,18 +45,18 @@ export class SignUp extends Block<Props> {
               name: 'password',
               placeholder: 'Password',
             }),
-            repeatPassword: new Input({
+            repeat_password: new Input({
               type: 'password',
-              name: 'repeatPassword',
+              name: 'repeat_password',
               placeholder: 'Repeat password',
             }),
-            signUp: new Button({
+            sign_up: new Button({
               type: 'submit',
               view: 'default',
               children: 'Sign up',
               name: 'sign_up',
             }),
-            signIn: new Link({
+            sign_in: new Link({
               children: 'Sign in',
               href: ROUTES.signIn,
             }),

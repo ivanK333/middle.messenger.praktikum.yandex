@@ -21,8 +21,8 @@ export class CreateChat extends Block<Props> {
           title: 'Create chat',
           children: new CreateChatForm({
             avatar: new AvatarUpload({ className: styles.avatar }),
-            chatName: new Input({
-              name: 'chatName',
+            display_name: new Input({
+              name: 'display_name',
               placeholder: 'Chat name',
               className: styles.input,
             }),

@@ -23,8 +23,8 @@ export class InfoChat extends Block<Props> {
           title: 'Info chat',
           children: new InfoChatForm({
             avatar: new AvatarUpload({ className: styles.avatar }),
-            chatName: new Input({
-              name: 'chatName',
+            display_name: new Input({
+              name: 'display_name',
               placeholder: 'Chat name',
               className: styles.input,
             }),

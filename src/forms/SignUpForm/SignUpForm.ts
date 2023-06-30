@@ -16,11 +16,11 @@ export class SignUpForm extends Block<Props> {
       fields: {
         email: [VALIDATION_RULES.required, VALIDATION_RULES.email],
         login: [VALIDATION_RULES.required, VALIDATION_RULES.login],
-        firstName: [VALIDATION_RULES.required, VALIDATION_RULES.name],
-        secondName: [VALIDATION_RULES.required, VALIDATION_RULES.name],
+        first_name: [VALIDATION_RULES.required, VALIDATION_RULES.name],
+        second_name: [VALIDATION_RULES.required, VALIDATION_RULES.name],
         phone: [VALIDATION_RULES.required, VALIDATION_RULES.phone],
         password: [VALIDATION_RULES.required, VALIDATION_RULES.password],
-        repeatPassword: [
+        repeat_password: [
           VALIDATION_RULES.required,
           {
             rule: VALIDATION_RULES.password.rule,

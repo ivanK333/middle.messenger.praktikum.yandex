@@ -14,7 +14,7 @@ export class CreateChatForm extends Block<Props> {
     new FormValidator<Values>({
       form: this.getContent() as HTMLFormElement,
       fields: {
-        chatName: [VALIDATION_RULES.required],
+        display_name: [VALIDATION_RULES.required],
       },
       onSubmit: (values) => console.log(values),
     });
