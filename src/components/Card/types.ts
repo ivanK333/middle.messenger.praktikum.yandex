@@ -1,8 +1,15 @@
-import { Block } from '../../libs';
+import {
+  ChangePasswordForm,
+  CreateChatForm,
+  SignInForm,
+  SignUpForm,
+  InfoChatForm,
+  ProfileForm,
+} from '../../forms';
 
 export type Props = {
   className?: string,
   classNameTitle?: string,
   title?: string,
-  children: Block,
+  children: ChangePasswordForm | CreateChatForm | SignInForm | SignUpForm | InfoChatForm | ProfileForm,
 };

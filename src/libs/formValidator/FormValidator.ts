@@ -63,13 +63,14 @@ export class FormValidator<V extends object = {}> {
 
   private _validateInput(inputContainer: InputContainer): Record<keyof V, string> | {} {
     const input = inputContainer.querySelector('input') as HTMLInputElement;
-    // const errorContainer = inputContainer.querySelector('span');
+    const errorContainer = inputContainer.querySelector('span') as HTMLSpanElement;
     const fieldRules: Rule[] = this.fields[input.name as keyof V];
     let error: Record<keyof V, string> | {} = {};
 
     for (let i = 0; i < fieldRules.length; i++) {
       if (!fieldRules[i].rule.test(input.value)) {
         inputContainer.classList.add(styles.error);
+        errorContainer.innerHTML = fieldRules[i].message;
         error = { ...error, [input.name]: fieldRules[i].message };
         break;
       }
@@ -82,11 +83,13 @@ export class FormValidator<V extends object = {}> {
         const referenceInput = referenceContainer.querySelector('input') as HTMLInputElement;
         if (referenceInput.value !== input.value) {
           inputContainer.classList.add(styles.error);
+          errorContainer.innerHTML = fieldRules[i].message;
           error = { ...error, [input.name]: fieldRules[i].message };
         }
         return error;
       }
       inputContainer.classList.remove(styles.error);
+      errorContainer.innerHTML = '';
     }
     return error;
   }

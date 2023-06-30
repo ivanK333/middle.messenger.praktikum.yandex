@@ -7,7 +7,7 @@ import {
 } from './types';
 import { useAccessCheck } from '../../utils';
 
-export class Block<P extends object = {}> {
+export class Block<P extends Record<string, unknown>> {
   public props: BaseBlockProps<P>;
 
   public readonly eventBus: () => EventBus;
@@ -132,11 +132,9 @@ export class Block<P extends object = {}> {
           throw new Error('No access');
         }
 
-        if (prop in target) {
-          const value = target[prop];
+        const value = target[prop as keyof BaseBlockProps<P>];
 
-          return typeof value === 'function' ? value.bind(target) : value;
-        }
+        return typeof value === 'function' ? value.bind(target) : value;
         return null;
       },
 
@@ -158,40 +156,39 @@ export class Block<P extends object = {}> {
   }
 
   private _removeEvents() {
-    const { events = {} } = this.props;
-    console.log(events);
+    const { events } = this.props;
     if (!events) return;
-    console.log(events);
     Object.keys(events).forEach((name) => {
-      this._element.removeEventListener(name, events[name]);
+      this._element.removeEventListener(name, events[name as keyof WindowEventMap]);
     });
   }
 
   private _addEvents() {
-    const { events = {} } = this.props;
+    const { events } = this.props;
     if (!events) return;
     Object.keys(events).forEach((name) => {
-      this._element.addEventListener(name, events[name]);
+      this._element.addEventListener(name, events[name as keyof WindowEventMap]);
     });
   }
 
-  protected compile(template: (p: BaseBlockProps<P>) => string, p: BaseBlockProps<P>) {
+  protected compile(template: (p: Record<keyof BaseBlockProps<P>, unknown>) => string, p: BaseBlockProps<P>) {
     Object.assign(this.props, p);
 
-    const children: Block[] | HTMLSpanElement = [];
-    const props = p;
+    const children: Block<P>[] | HTMLSpanElement = [];
+    const props: Record<keyof BaseBlockProps<P>, unknown> = p;
 
     Object.keys(props).forEach((key) => {
-      if (props[key as keyof BaseBlockProps<P>] instanceof Block) {
-        children.push(props[key]);
-        props[key] = `<span data-id="${(props[key]).id}"></span>`;
+      if (props[key] instanceof Block) {
+        children.push(props[key] as Block<P>);
+        props[key as keyof P] = `<span data-id="${(props[key] as Block<P>).id}"></span>`;
       }
 
-      if (Array.isArray(props[key as keyof BaseBlockProps<P>])) {
-        props[key].forEach((el, index) => {
+      if (Array.isArray(props[key])) {
+        const propsArr = props[key] as Block<P>[] | string[];
+        propsArr.forEach((el, index) => {
           if (el instanceof Block) {
             children.push(el);
-            props[key][index] = `<span data-id="${props[key][index].id}"></span>`;
+            propsArr[index] = `<span data-id="${((propsArr[index]) as Block<P>).id}"></span>`;
           }
         });
       }

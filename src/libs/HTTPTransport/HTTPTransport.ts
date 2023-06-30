@@ -15,7 +15,7 @@ export class HTTPTransport {
     let query = '';
 
     if (data && isGet) {
-      query = queryStringify<D>(data);
+      query = queryStringify(data);
     }
 
     return new Promise((resolve, reject) => {

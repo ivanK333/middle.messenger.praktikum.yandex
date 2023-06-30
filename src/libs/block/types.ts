@@ -1,8 +1,5 @@
-export type BaseBlockProps<P> = P & {
-  /**
-   any functions can be used in the events type for universality
-   */
-  events?: Record<keyof WindowEventMap, (e: any) => any>,
+export type BaseBlockProps<P extends Record<string, unknown>> = P & {
+  events?: Record<keyof WindowEventMap, (e: unknown) => void>,
   className?: string,
   styles?: Record<string, string>,
 };
