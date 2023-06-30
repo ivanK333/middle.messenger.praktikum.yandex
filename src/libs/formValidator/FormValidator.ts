@@ -70,7 +70,9 @@ export class FormValidator<V extends object = {}> {
     for (let i = 0; i < fieldRules.length; i++) {
       if (!fieldRules[i].rule.test(input.value)) {
         inputContainer.classList.add(styles.error);
-        errorContainer.innerHTML = fieldRules[i].message;
+        if (errorContainer) {
+          errorContainer.textContent = fieldRules[i].message;
+        }
         error = { ...error, [input.name]: fieldRules[i].message };
         break;
       }
@@ -83,13 +85,15 @@ export class FormValidator<V extends object = {}> {
         const referenceInput = referenceContainer.querySelector('input') as HTMLInputElement;
         if (referenceInput.value !== input.value) {
           inputContainer.classList.add(styles.error);
-          errorContainer.innerHTML = fieldRules[i].message;
+          errorContainer.textContent = fieldRules[i].message;
           error = { ...error, [input.name]: fieldRules[i].message };
         }
         return error;
       }
       inputContainer.classList.remove(styles.error);
-      errorContainer.innerHTML = '';
+      if (errorContainer) {
+        errorContainer.textContent = fieldRules[i].message;
+      }
     }
     return error;
   }

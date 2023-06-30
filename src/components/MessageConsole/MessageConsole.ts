@@ -3,8 +3,9 @@ import { ButtonSend } from '../ButtonSend';
 import staple from '../../../static/img/staple.svg';
 import template from './MessageConsole.hbs';
 import styles from './styles.module.pcss';
-import { Props } from '.';
-import { Block } from '../../libs';
+import { Props, Values } from '.';
+import { Block, FormValidator } from '../../libs';
+import { VALIDATION_RULES } from '../../appConstants';
 
 export class MessageConsole extends Block<Props> {
   constructor(props: Props) {
@@ -19,6 +20,17 @@ export class MessageConsole extends Block<Props> {
     }, 'form');
   }
 
+  componentDidMount() {
+    // eslint-disable-next-line no-new
+    new FormValidator<Values>({
+      form: this.getContent().querySelector('form') as HTMLFormElement,
+      fields: {
+        message: [VALIDATION_RULES.required],
+      },
+      onSubmit: (values) => console.log(values),
+    });
+  }
+
   render() {
     const {
       className = '',
@@ -28,6 +40,7 @@ export class MessageConsole extends Block<Props> {
     return this.compile(template, {
       ...props,
       className: `${styles.messageConsole} ${className}`,
+      classNameForm: styles.form,
       classNameImg: styles.img,
       img: staple,
     });

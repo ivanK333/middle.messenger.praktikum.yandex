@@ -4,8 +4,9 @@ import newChat from '../../../static/img/new_chat.svg';
 import search from '../../../static/img/search.svg';
 import template from './HeaderSidebar.hbs';
 import styles from './styles.module.pcss';
-import { Block } from '../../libs';
-import { Props } from '.';
+import { Block, FormValidator } from '../../libs';
+import { Props, Values } from '.';
+import { VALIDATION_RULES } from '../../appConstants';
 
 export class HeaderSidebar extends Block<Props> {
   constructor(props: Props) {
@@ -13,6 +14,17 @@ export class HeaderSidebar extends Block<Props> {
       ...props,
       search: new InputChat({ img: search, name: 'search' }),
       avatar: new Avatar({ src: '' }),
+    });
+  }
+
+  componentDidMount() {
+    // eslint-disable-next-line no-new
+    new FormValidator<Values>({
+      form: this.getContent() as HTMLFormElement,
+      fields: {
+        search: [VALIDATION_RULES.required],
+      },
+      onSubmit: (values) => console.log(values),
     });
   }
 
