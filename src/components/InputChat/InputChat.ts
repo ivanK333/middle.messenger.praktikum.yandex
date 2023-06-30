@@ -11,6 +11,8 @@ export class InputChat extends Block<Props> {
       ...props
     } = this.props;
 
+    this.getContent().setAttribute('id', 'input');
+
     return this.compile(template, {
       ...props,
       type,
