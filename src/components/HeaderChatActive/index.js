@@ -1,1 +1,0 @@
-export { HeaderChatActive } from './HeaderChatActive';

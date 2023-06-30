@@ -1,0 +1,34 @@
+import template from './ChatPreview.hbs';
+import { Avatar } from '../Avatar';
+import { Block } from '../../libs';
+import { Props } from '.';
+import vite from '../../../static/img/vite.svg';
+import styles from './styles.module.pcss';
+
+export class ChatPreview extends Block<Props> {
+  constructor(props: Props) {
+    super({
+      ...props,
+      avatar: new Avatar({ src: vite }),
+    }, 'li');
+  }
+
+  render() {
+    const {
+      className = '',
+      ...props
+    } = this.props;
+
+    return this.compile(template, {
+      ...props,
+      className: `${styles.container} ${className}`,
+      classNameHeader: styles.header,
+      classNameFooter: styles.footer,
+      classNameDate: styles.date,
+      classNameTitle: styles.title,
+      classNameMessage: styles.message,
+      classNameCount: styles.count,
+      classNameWrapper: styles.wrapper,
+    });
+  }
+}

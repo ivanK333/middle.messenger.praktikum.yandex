@@ -1,41 +1,41 @@
-@import "../../styles/_variables.pcss";
-@import "../../styles/_mixins.pcss";
+@import url("../../styles/_variables.pcss");
+@import url("../../styles/_mixins.pcss");
 
 .wrap {
-    padding: 12px;
-    margin: 12px;
-    border: none;
-    background: $color-bg-2;
-    max-width: 60%;
-    border-radius: 0 8px 8px 8px;
+  padding: 12px;
+  margin: 12px;
+  border: none;
+  background: $color-bg-2;
+  max-width: 60%;
+  border-radius: 0 8px 8px;
 }
 
 .message {
-    @mixin typography-text-m;
+  @mixin typography-text-m;
 }
 
 .info {
-    @mixin flexbox center, flex-end;
+  @mixin flexbox center, flex-end;
 }
 
 .date {
-    @mixin typography-text-s;
+  @mixin typography-text-s;
 
-    color: $color-text-grey;
+  color: $color-text-grey;
 }
 
 .send {
-    @mixin flexbox center, flex-end;
+  @mixin flexbox center, flex-end;
 
-    .wrap {
-        border-radius: 8px 8px 0 8px;
-        background: $color-palette-lightblue-3;
-    }
+  .wrap {
+    border-radius: 8px 8px 0;
+    background: $color-palette-lightblue-3;
+  }
 
 
-    .date {
-        @mixin typography-text-s;
+  .date {
+    @mixin typography-text-s;
 
-        color: $color-text-white;
-    }
+    color: $color-text-white;
+  }
 }

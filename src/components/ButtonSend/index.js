@@ -1,1 +1,0 @@
-export { ButtonSend } from './ButtonSend';
