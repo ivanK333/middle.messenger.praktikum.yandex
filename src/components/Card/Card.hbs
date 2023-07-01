@@ -1,11 +1,5 @@
-<section class="{{className}}">
-    <div>
-        {{#if title}}
-            <h1 class="{{classNameTitle}}">{{title}}</h1>
-        {{/if}}
-    </div>
+{{#if title}}
+    <h1 class="{{classNameTitle}}">{{title}}</h1>
+{{/if}}
 
-    <form class="{{classNameForm}}">
-        {{{children}}}
-    </form>
-</section>
+{{{children}}}

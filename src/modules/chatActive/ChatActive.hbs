@@ -1,9 +1,7 @@
-<section class="{{className}}">
-    {{{header}}}
-    <ul class="{{classNameChat}}">
-        {{#each messages}}
-           {{{message}}}
-        {{/each}}
-    </ul>
-    {{{messageConsole}}}
-</section>
+{{{header}}}
+<ul class="{{classNameChat}}">
+    {{#each messages}}
+        {{{this}}}
+    {{/each}}
+</ul>
+{{{messageConsole}}}

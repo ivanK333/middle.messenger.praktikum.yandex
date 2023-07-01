@@ -1,1 +1,0 @@
-export { MessageConsole } from './MessageConsole';

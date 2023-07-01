@@ -1,35 +1,36 @@
-@import "../../styles/_mixins.pcss";
-@import "../../styles/_variables.pcss";
+@import url("../../styles/_mixins.pcss");
+@import url("../../styles/_variables.pcss");
 
 .container {
-    @mixin flexbox;
-    position: relative;
-    width: 100%;
-    height: $input-height;
-    padding-left: 12px;
-    background: $color-bg-2;
-    border-radius: 8px;
+  @mixin flexbox;
 
-    &:hover {
-        .img {
-            fill: #356df9;
-        }
+  position: relative;
+  width: 100%;
+  height: $input-height;
+  padding-left: 12px;
+  background: $color-bg-2;
+  border-radius: 8px;
+
+  &:hover {
+    .img {
+      fill: #356DF9;
     }
+  }
 }
 
 .input {
-    @mixin typography-text-l;
+  @mixin typography-text-l;
 
-    width: 100%;
-    border: none;
-    background: transparent;
+  width: 100%;
+  border: none;
+  background: transparent;
 
-    &::placeholder {
-        color: $color-text-primary;
-        font-weight: 400;
-    }
+  &::placeholder {
+    color: $color-text-primary;
+    font-weight: 400;
+  }
 }
 
 .img {
-    margin-right: 6px;
+  margin-right: 6px;
 }

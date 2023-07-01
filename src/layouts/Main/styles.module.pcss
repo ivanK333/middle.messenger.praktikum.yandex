@@ -1,28 +1,23 @@
-@import "../../styles/_mixins.pcss";
-@import "../../styles/_variables.pcss";
-
-$header-height: 24px;
+@import url("../../styles/_mixins.pcss");
+@import url("../../styles/_variables.pcss");
 
 .header {
-    @mixin flexbox;
-    height: $header-height;
+  @mixin flexbox;
+
+  height: 24px;
 }
 
 .nav {
-    width: 100%;
-    max-width: 800px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .navList {
-    @mixin flexbox center, space-between;
-    width: 100%;
+  @mixin flexbox center, space-between;
 
-    a {
-        color: $color-text-tertiary;
-    }
-}
+  width: 100%;
 
-.main {
-    width: 100%;
-    height: calc(100% - $header-height);
+  a {
+    color: $color-text-tertiary;
+  }
 }
