@@ -7,7 +7,7 @@ import {
 } from './types';
 import { useAccessCheck } from '../../utils';
 
-export class Block<P extends Record<string, unknown>> {
+export class Block<P extends Record<string, unknown> = {}> {
   public props: BaseBlockProps<P>;
 
   public readonly eventBus: () => EventBus;
