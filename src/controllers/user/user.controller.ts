@@ -25,7 +25,7 @@ export class UserController {
 
       this.store.setState('user', resUpdateAvatar);
     } catch (err) {
-      console.log(err.reason);
+      console.log(err);
     }
   }
 }

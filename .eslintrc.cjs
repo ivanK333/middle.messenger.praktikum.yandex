@@ -19,6 +19,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-restricted-syntax': 'off',
     'no-constructor-return': 'off',
+    'no-param-reassign': 'off',
     'no-continue': 'off',
     'no-prototype-builtins': 'off',
     '@typescript-eslint/no-unused-expressions': 0,

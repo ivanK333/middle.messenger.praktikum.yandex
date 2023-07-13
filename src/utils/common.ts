@@ -53,26 +53,24 @@ export function cloneDeep<T extends object = object>(obj: T) {
   return result;
 }
 
-export function merge(obj1: PlainObject, obj2: PlainObject): PlainObject {
-  const merged: PlainObject = {};
+function merge(lhs: PlainObject, rhs: PlainObject): PlainObject {
+  for (const p in rhs) {
+    if (!rhs.hasOwnProperty(p)) {
+      continue;
+    }
 
-  const keys = Array.from(new Set([...Object.keys(obj1), ...Object.keys(obj2)]));
-
-  for (const key of keys) {
-    if (obj1.hasOwnProperty(key) && obj2.hasOwnProperty(key)) {
-      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-        merged[key] = merge(obj1[key] as PlainObject, obj2[key] as PlainObject);
+    try {
+      if (isObject(rhs[p])) {
+        rhs[p] = merge(lhs[p] as PlainObject, rhs[p] as PlainObject);
       } else {
-        merged[key] = obj2[key];
+        lhs[p] = rhs[p];
       }
-    } else if (obj1.hasOwnProperty(key)) {
-      merged[key] = obj1[key];
-    } else {
-      merged[key] = obj2[key];
+    } catch (e) {
+      lhs[p] = rhs[p];
     }
   }
 
-  return merged;
+  return lhs;
 }
 
 export function set(object: PlainObject | unknown, path: string, value: unknown): PlainObject | unknown {
