@@ -11,6 +11,7 @@ import { Block } from '../../libs';
 import { InfoChatForm } from '../../forms';
 import { Props } from '.';
 import template from './InfoChat.hbs';
+import { router } from '../../router';
 
 export class InfoChat extends Block<Props> {
   public isChangeData: boolean;
@@ -18,7 +19,8 @@ export class InfoChat extends Block<Props> {
   constructor() {
     super({
       slide: new Slide({
-        buttonBack: new ButtonBack({}),
+        // @ts-ignore
+        buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           title: 'Info chat',
           children: new InfoChatForm({

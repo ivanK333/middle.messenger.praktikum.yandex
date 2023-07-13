@@ -12,4 +12,5 @@ export type Options<D> = {
   headers?: Record<string, string>,
   data?: D,
   timeout?: number,
+  withCredentials?: boolean,
 };

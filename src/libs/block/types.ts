@@ -1,3 +1,5 @@
+import { Block } from '.';
+
 export type BaseBlockProps<P extends Record<string, unknown>> = P & {
   events?: Record<keyof WindowEventMap, (e: unknown) => void>,
   className?: string,
@@ -15,4 +17,8 @@ export enum EVENTS {
   cdu = 'component-did-update',
   render = 'render',
   mounted = 'mounted',
+}
+
+export interface BlockConstructor {
+  new(...args: any[]): Block
 }

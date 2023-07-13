@@ -1,5 +1,5 @@
 import { InputChat } from '../InputChat';
-import { Avatar } from '../Avatar';
+import { HeaderSidebarAvatar } from '../HeaderSidebarAvatar';
 
 export type Values = {
   search: string,
@@ -11,7 +11,7 @@ export type Props = {
   classNameButton?: string,
   classNameAvatar?: string,
   classNameName?: string,
-  avatar?: Avatar,
+  avatar?: HeaderSidebarAvatar,
   img?: string,
   search?: InputChat,
   name: string,

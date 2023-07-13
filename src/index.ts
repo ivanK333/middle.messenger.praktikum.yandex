@@ -1,13 +1,27 @@
-import { Main } from './layouts';
 import { router } from './router';
+import { ROUTES } from './appConstants';
+import {
+  SignIn,
+  SignUp,
+  CreateChat,
+  InfoChat,
+  Chat,
+  NotFound,
+  InternalError,
+  Profile,
+  ChangePassword,
+} from './pages';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const content = document.getElementById('root');
-
-  if (content) {
-    content.appendChild(new Main({ children: router() }).render());
-  }
+  router
+    .use(ROUTES.signIn, SignIn)
+    .use(ROUTES.signUp, SignUp)
+    .use(ROUTES.createChat, CreateChat)
+    .use(ROUTES.infoChat, InfoChat)
+    .use(ROUTES.chat, Chat)
+    .use(ROUTES.notFound, NotFound)
+    .use(ROUTES.internalError, InternalError)
+    .use(ROUTES.profile, Profile)
+    .use(ROUTES.changePassword, ChangePassword)
+    .start();
 });
-
-window.addEventListener('hashchange', router);
-window.addEventListener('load', router);

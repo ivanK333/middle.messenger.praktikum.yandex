@@ -1,3 +1,4 @@
+import { HeaderSidebarAvatar } from '../HeaderSidebarAvatar';
 import { Avatar } from '../Avatar';
 import { InputChat } from '../InputChat';
 import newChat from '../../../static/img/new_chat.svg';
@@ -6,14 +7,25 @@ import template from './HeaderSidebar.hbs';
 import styles from './styles.module.pcss';
 import { Block, FormValidator } from '../../libs';
 import { Props, Values } from '.';
-import { VALIDATION_RULES } from '../../appConstants';
+import { ROUTES, VALIDATION_RULES } from '../../appConstants';
+import { router } from '../../router';
 
 export class HeaderSidebar extends Block<Props> {
   constructor(props: Props) {
     super({
       ...props,
       search: new InputChat({ img: search, name: 'search' }),
-      avatar: new Avatar({ src: '' }),
+      avatar: new HeaderSidebarAvatar({
+        avatar: new Avatar({ src: '' }),
+        name: 'Ivan',
+        className: styles.avatar,
+        // @ts-ignore
+        events: {
+          click: () => {
+            router.go(ROUTES.profile);
+          },
+        },
+      }),
     });
   }
 

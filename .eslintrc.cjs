@@ -17,6 +17,10 @@ module.exports = {
     '@typescript-eslint/return-await': 0,
     'max-len': ['error', { code: 125 }],
     'class-methods-use-this': 0,
+    'no-restricted-syntax': 'off',
+    'no-constructor-return': 'off',
+    'no-continue': 'off',
+    'no-prototype-builtins': 'off',
     '@typescript-eslint/no-unused-expressions': 0,
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }]
   },

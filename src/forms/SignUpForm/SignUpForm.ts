@@ -1,12 +1,17 @@
 import template from './SignUpForm.hbs';
+import { AuthController } from '../../controllers';
 import { Block, FormValidator } from '../../libs';
 import { Props, Values } from '.';
 import styles from './styles.module.pcss';
 import { VALIDATION_RULES } from '../../appConstants';
 
 export class SignUpForm extends Block<Props> {
+  private controller: AuthController;
+
   constructor(props: Props) {
     super(props, 'form');
+
+    this.controller = new AuthController();
   }
 
   componentDidMount() {
@@ -29,7 +34,10 @@ export class SignUpForm extends Block<Props> {
           },
         ],
       },
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        const { repeat_password, ...variables } = values;
+        this.controller.signUp(variables);
+      },
     });
   }
 

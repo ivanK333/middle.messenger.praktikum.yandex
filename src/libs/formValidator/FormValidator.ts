@@ -92,7 +92,7 @@ export class FormValidator<V extends object = {}> {
       }
       inputContainer.classList.remove(styles.error);
       if (errorContainer) {
-        errorContainer.textContent = fieldRules[i].message;
+        errorContainer.textContent = '';
       }
     }
     return error;

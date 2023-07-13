@@ -6,22 +6,39 @@ import {
   AvatarUpload,
   ButtonBack,
 } from '../../components';
-import { ROUTES } from '../../appConstants';
 import template from './Profile.hbs';
+import { AuthController, UserController } from '../../controllers';
 import { Slide } from '../../layouts';
-import { ProfileForm } from '../../forms';
+import { ProfileForm, Props as ProfileFormProps } from '../../forms/ProfileForm';
 import { Props } from '.';
 import styles from './styles.module.pcss';
 import { Block } from '../../libs';
+import { withStore, Store, State } from '../../store';
+import { router } from '../../router';
+import { ROUTES } from '../../appConstants';
+import { User } from '../../types';
 
-export class Profile extends Block<Props> {
+class BaseProfile extends Block<Props> {
+  public authController: AuthController;
+
+  public userController: UserController;
+
   constructor() {
     super({
       slide: new Slide({
-        buttonBack: new ButtonBack({}),
+        // @ts-ignore
+        buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           children: new ProfileForm({
-            avatar: new AvatarUpload({}),
+            avatar: new AvatarUpload({
+              // @ts-ignore
+              events: {
+                change: (event: Event) => {
+                  const file = (event.target as HTMLInputElement)?.files?.[0];
+                  this.userController.updateAvatar(file);
+                },
+              },
+            }),
             email: new Input({
               name: 'email',
               placeholder: 'email',
@@ -54,17 +71,75 @@ export class Profile extends Block<Props> {
             }),
             change_password: new Link({
               children: 'Change password',
-              href: ROUTES.changePassword,
+              // @ts-ignore
+              events: {
+                click: () => { router.go(ROUTES.changePassword); },
+              },
             }),
             log_out: new Link({
               children: 'Log out',
               color: 'red',
-              href: ROUTES.signIn,
+              // @ts-ignore
+              events: {
+                click: () => { this.authController.logout(); },
+              },
             }),
           }),
         }),
       }),
     }, 'main');
+
+    this.authController = new AuthController();
+    this.userController = new UserController();
+
+    this.authController.getUser();
+  }
+
+  public setCurrentValueUser(form: ProfileFormProps, user: User) {
+    const {
+      email,
+      login,
+      first_name,
+      second_name,
+      phone,
+      display_name,
+      avatar,
+    } = form;
+
+    avatar.setProps({
+      src: user.avatar ? user.avatar : '',
+    });
+    email.setProps({
+      value: user.email ? user.email : '',
+    });
+    login.setProps({
+      value: user.login ? user.login : '',
+    });
+    first_name.setProps({
+      value: user.first_name ? user.first_name : '',
+    });
+    second_name.setProps({
+      value: user.second_name ? user.second_name : '',
+    });
+    phone.setProps({
+      value: user.phone ? user.phone : '',
+    });
+    display_name.setProps({
+      value: user.display_name ? user.display_name : '',
+    });
+  }
+
+  componentDidMount() {
+    const store = new Store();
+
+    const { user } = store.getState();
+    if (user) {
+      const { slide } = this.props;
+      const { card } = slide.props;
+      const form = card.props.children.props as ProfileFormProps;
+
+      this.setCurrentValueUser(form, user);
+    }
   }
 
   render() {
@@ -73,3 +148,7 @@ export class Profile extends Block<Props> {
     return this.compile(template, { ...props, className: `${styles.main} ${className}` });
   }
 }
+
+const mapStateToProps = (state: State) => ({ ...state.user });
+
+export const Profile = withStore(mapStateToProps)(BaseProfile as typeof Block);

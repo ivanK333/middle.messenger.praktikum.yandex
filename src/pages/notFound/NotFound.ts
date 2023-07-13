@@ -3,7 +3,6 @@ import { Link } from '../../components';
 import template from './NotFound.hbs';
 import { Props } from '.';
 
-import { ROUTES } from '../../appConstants';
 import { Block } from '../../libs';
 import styles from './styles.module.pcss';
 
@@ -15,7 +14,6 @@ export class NotFound extends Block<Props> {
         title: 'Wrong place',
         link: new Link({
           children: 'Back to Chats',
-          href: ROUTES.chat,
         }),
       }),
     });

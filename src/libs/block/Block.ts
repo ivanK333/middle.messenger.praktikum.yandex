@@ -5,9 +5,9 @@ import {
   Meta,
   EVENTS,
 } from './types';
-import { useAccessCheck } from '../../utils';
+import { useAccessCheck, isEqual, cloneDeep } from '../../utils';
 
-export class Block<P extends Record<string, unknown>> {
+export class Block<P extends Record<string, unknown> = {}> {
   public props: BaseBlockProps<P>;
 
   public readonly eventBus: () => EventBus;
@@ -76,15 +76,19 @@ export class Block<P extends Record<string, unknown>> {
     this.eventBus().emit(EVENTS.cdm);
   }
 
-  private _componentDidUpdate() {
-    const response = this.componentDidUpdate();
+  private _componentDidUpdate(prevProps: P, newProps: P) {
+    const response = this.componentDidUpdate(prevProps, newProps);
 
     if (response) {
       this.eventBus().emit(EVENTS.render);
     }
   }
 
-  public componentDidUpdate() {
+  public componentDidUpdate(prevProps: P, nextProps: P) {
+    if (prevProps && nextProps) {
+      return !isEqual(prevProps, nextProps);
+    }
+
     return true;
   }
 
@@ -93,8 +97,10 @@ export class Block<P extends Record<string, unknown>> {
       return;
     }
 
+    const props = cloneDeep(this.props);
+    const newProps = cloneDeep({ ...this.props, ...nextProps });
     Object.assign(this.props, nextProps);
-    this.eventBus().emit(EVENTS.cdu, this.props, nextProps);
+    this.eventBus().emit(EVENTS.cdu, props, newProps);
   };
 
   get element(): HTMLElement {

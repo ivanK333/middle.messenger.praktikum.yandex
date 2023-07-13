@@ -4,7 +4,6 @@ import {
   Link,
   Card,
 } from '../../components';
-import { ROUTES } from '../../appConstants';
 import { Slide } from '../../layouts';
 import { SignUpForm } from '../../forms';
 import template from './SignUp.hbs';
@@ -12,6 +11,8 @@ import { Block } from '../../libs';
 import { Props } from '.';
 
 import styles from './styles.module.pcss';
+import { router } from '../../router';
+import { ROUTES } from '../../appConstants';
 
 export class SignUp extends Block<Props> {
   constructor() {
@@ -23,32 +24,39 @@ export class SignUp extends Block<Props> {
             email: new Input({
               name: 'email',
               placeholder: 'email',
+              value: 'user@ivan.com',
             }),
             login: new Input({
               name: 'login',
               placeholder: 'Login',
+              value: 'Ivan77',
             }),
             first_name: new Input({
               name: 'first_name',
               placeholder: 'First name',
+              value: 'Ivan',
             }),
             second_name: new Input({
               name: 'second_name',
               placeholder: 'Second name',
+              value: 'Ivanov',
             }),
             phone: new Input({
               name: 'phone',
               placeholder: 'Phone',
+              value: '+71231232332',
             }),
             password: new Input({
               type: 'password',
               name: 'password',
               placeholder: 'Password',
+              value: 'Qwerty123',
             }),
             repeat_password: new Input({
               type: 'password',
               name: 'repeat_password',
               placeholder: 'Repeat password',
+              value: 'Qwerty123',
             }),
             sign_up: new Button({
               type: 'submit',
@@ -58,7 +66,10 @@ export class SignUp extends Block<Props> {
             }),
             sign_in: new Link({
               children: 'Sign in',
-              href: ROUTES.signIn,
+              // @ts-ignore
+              events: {
+                click: () => { router.go(ROUTES.signIn); },
+              },
             }),
           }),
         }),

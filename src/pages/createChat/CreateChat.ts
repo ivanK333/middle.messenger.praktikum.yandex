@@ -11,12 +11,14 @@ import { Block } from '../../libs';
 import { CreateChatForm } from '../../forms';
 import { Props } from '.';
 import template from './CreateChat.hbs';
+import { router } from '../../router';
 
 export class CreateChat extends Block<Props> {
   constructor() {
     super({
       slide: new Slide({
-        buttonBack: new ButtonBack({}),
+        // @ts-ignore
+        buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           title: 'Create chat',
           children: new CreateChatForm({

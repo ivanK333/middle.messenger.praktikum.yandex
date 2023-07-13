@@ -6,7 +6,6 @@ import {
 } from '../../components';
 import { SignInForm } from '../../forms';
 import template from './SignIn.hbs';
-import { ROUTES } from '../../appConstants';
 import { Slide } from '../../layouts';
 import { Block } from '../../libs';
 import { Props } from '.';
@@ -23,12 +22,14 @@ export class SignIn extends Block<Props> {
               type: 'text',
               name: 'login',
               placeholder: 'Login',
+              value: 'Ivan77',
               className: styles.login,
             }),
             password: new Input({
               type: 'password',
               name: 'password',
               placeholder: 'Password',
+              value: 'Qwerty123',
               className: styles.password,
             }),
             signIn: new Button({
@@ -40,7 +41,6 @@ export class SignIn extends Block<Props> {
             }),
             signUp: new Link({
               children: 'Sign up',
-              href: ROUTES.signUp,
             }),
           }),
         }),

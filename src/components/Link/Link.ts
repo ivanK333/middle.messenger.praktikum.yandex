@@ -5,26 +5,23 @@ import { Block } from '../../libs';
 
 export class Link extends Block<Props> {
   constructor(props: Props) {
-    super(props, 'a');
+    super(props, 'button');
   }
 
   render() {
     const {
       color = 'blue',
+      type = 'button',
       className = '',
-      href,
-      target = '_self',
       ...props
     } = this.props;
 
-    this._element.setAttribute('href', href);
-    this._element.setAttribute('target', target);
+    this._element.setAttribute('type', type);
 
     return this.compile(template, {
       ...props,
+      type,
       className: `${styles.link} ${styles[color]} ${className}`,
-      href,
-      target,
     });
   }
 }
