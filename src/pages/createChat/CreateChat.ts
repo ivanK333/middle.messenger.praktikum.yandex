@@ -2,7 +2,6 @@ import {
   Input,
   Button,
   Card,
-  AvatarUpload,
   ButtonBack,
 } from '../../components';
 import { Slide } from '../../layouts';
@@ -17,12 +16,10 @@ export class CreateChat extends Block<Props> {
   constructor() {
     super({
       slide: new Slide({
-        // @ts-ignore
         buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           title: 'Create chat',
           children: new CreateChatForm({
-            avatar: new AvatarUpload({ className: styles.avatar }),
             display_name: new Input({
               name: 'display_name',
               placeholder: 'Chat name',

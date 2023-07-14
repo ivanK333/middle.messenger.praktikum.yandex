@@ -19,7 +19,6 @@ export class InfoChat extends Block<Props> {
   constructor() {
     super({
       slide: new Slide({
-        // @ts-ignore
         buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           title: 'Info chat',

@@ -3,8 +3,6 @@ export type SignInReq = {
   password: string,
 };
 
-export type SignInRes = {};
-
 export type SignUpReq = {
   first_name: string,
   second_name: string,
@@ -14,7 +12,16 @@ export type SignUpReq = {
   phone: string,
 };
 
-export type SignUpRes = {};
+export type UserRes = {
+  id: number | null,
+  first_name: string,
+  second_name: string,
+  display_name: string,
+  login: string,
+  email: string,
+  phone: string,
+  avatar: string | null,
+};
 
 export type GetUserRes = {
   id: number,

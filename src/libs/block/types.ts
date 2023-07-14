@@ -1,7 +1,11 @@
 import { Block } from '.';
 
+type PartialRecord<K extends keyof any, T> = {
+  [P in K]?: T;
+};
+
 export type BaseBlockProps<P extends Record<string, unknown>> = P & {
-  events?: Record<keyof WindowEventMap, (e: unknown) => void>,
+  events?: PartialRecord<keyof WindowEventMap, (e: unknown) => void>,
   className?: string,
   styles?: Record<string, string>,
 };

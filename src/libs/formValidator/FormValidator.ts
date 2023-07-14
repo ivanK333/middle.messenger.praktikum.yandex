@@ -11,7 +11,7 @@ export class FormValidator<V extends object = {}> {
 
   private readonly onSubmit: (values: V) => void;
 
-  public readonly inputContainers: InputContainer[];
+  private inputContainers: InputContainer[] | [];
 
   constructor(props: Props<V>) {
     this.form = props.form;
@@ -78,7 +78,7 @@ export class FormValidator<V extends object = {}> {
       }
 
       if (fieldRules[i].isEqualBy) {
-        const referenceContainer = this.inputContainers.filter((containers) => (
+        const referenceContainer = this.inputContainers.filter((containers: HTMLDivElement) => (
           (containers.querySelector('input') as HTMLInputElement).name === fieldRules[i].isEqualBy
         ))[0] as HTMLInputElement;
 
@@ -99,7 +99,7 @@ export class FormValidator<V extends object = {}> {
   }
 
   private _registerInputEvents() {
-    this.inputContainers.forEach((inputContainer) => {
+    this.inputContainers.forEach((inputContainer: HTMLDivElement) => {
       const input = inputContainer.querySelector('input') as HTMLInputElement;
       input.addEventListener('blur', () => {
         this._validateInput(inputContainer);
@@ -116,9 +116,8 @@ export class FormValidator<V extends object = {}> {
 
   private _detach() {
     this.form.removeEventListener('submit', (e) => this._handleSubmit(e));
-    this.inputContainers.forEach((inputContainer) => {
+    this.inputContainers.forEach((inputContainer: HTMLDivElement) => {
       const input = inputContainer.querySelector('input') as HTMLInputElement;
-
       input.removeEventListener('blur', () => this._validateInput(input));
       input.removeEventListener('input', () => this._validateInput(input));
     });
@@ -132,5 +131,11 @@ export class FormValidator<V extends object = {}> {
     if (isValid) {
       this.onSubmit(this.values);
     }
+  }
+
+  public resetForm() {
+    this.form.reset();
+    this.values = {} as V;
+    this.inputContainers = [];
   }
 }

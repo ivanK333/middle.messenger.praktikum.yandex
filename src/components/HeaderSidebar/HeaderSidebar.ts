@@ -1,14 +1,18 @@
-import { HeaderSidebarAvatar } from '../HeaderSidebarAvatar';
 import { Avatar } from '../Avatar';
 import { InputChat } from '../InputChat';
-import newChat from '../../../static/img/new_chat.svg';
 import search from '../../../static/img/search.svg';
 import template from './HeaderSidebar.hbs';
 import styles from './styles.module.pcss';
 import { Block, FormValidator } from '../../libs';
-import { Props, Values } from '.';
+import {
+  Props,
+  Values,
+  HeaderSidebarAvatar,
+  HeaderSidebarCreateChatButton,
+} from '.';
 import { ROUTES, VALIDATION_RULES } from '../../appConstants';
 import { router } from '../../router';
+import { Store } from '../../store';
 
 export class HeaderSidebar extends Block<Props> {
   constructor(props: Props) {
@@ -17,12 +21,17 @@ export class HeaderSidebar extends Block<Props> {
       search: new InputChat({ img: search, name: 'search' }),
       avatar: new HeaderSidebarAvatar({
         avatar: new Avatar({ src: '' }),
-        name: 'Ivan',
         className: styles.avatar,
-        // @ts-ignore
         events: {
           click: () => {
             router.go(ROUTES.profile);
+          },
+        },
+      }),
+      button: new HeaderSidebarCreateChatButton({
+        events: {
+          click: () => {
+            router.go(ROUTES.createChat);
           },
         },
       }),
@@ -30,6 +39,12 @@ export class HeaderSidebar extends Block<Props> {
   }
 
   componentDidMount() {
+    const store = new Store();
+    const { user } = store.getState();
+
+    this.props.avatar?.props?.avatar?.setProps({
+      src: user?.avatar ? user.avatar : '',
+    });
     // eslint-disable-next-line no-new
     new FormValidator<Values>({
       form: this.getContent() as HTMLFormElement,
@@ -50,10 +65,8 @@ export class HeaderSidebar extends Block<Props> {
       ...props,
       className: `${styles.header} ${className}`,
       classNameUserInfo: styles.userInfo,
-      classNameButton: styles.button,
       classNameAvatar: styles.avatar,
       classNameName: styles.name,
-      img: newChat,
     });
   }
 }

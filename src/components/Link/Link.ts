@@ -1,10 +1,10 @@
 import template from './Link.hbs';
 import styles from './styles.module.pcss';
 import { Props } from '.';
-import { Block } from '../../libs';
+import { Block, BaseBlockProps } from '../../libs/block';
 
 export class Link extends Block<Props> {
-  constructor(props: Props) {
+  constructor(props: BaseBlockProps<Props>) {
     super(props, 'button');
   }
 

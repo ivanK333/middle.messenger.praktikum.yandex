@@ -66,7 +66,6 @@ export class SignUp extends Block<Props> {
             }),
             sign_in: new Link({
               children: 'Sign in',
-              // @ts-ignore
               events: {
                 click: () => { router.go(ROUTES.signIn); },
               },

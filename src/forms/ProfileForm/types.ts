@@ -15,14 +15,14 @@ export type Values = {
 };
 
 export type Props = {
-  avatar: AvatarUpload,
-  email: Input,
-  login: Input,
-  first_name: Input,
-  second_name: Input,
-  phone: Input,
-  display_name: Input,
+  avatarInput: AvatarUpload,
+  emailInput: Input,
+  loginInput: Input,
+  firstNameInput: Input,
+  secondNameInput: Input,
+  phoneInput: Input,
+  displayNameInput: Input,
   save: Button,
-  change_password: Link,
-  log_out: Link,
+  changePasswordInput: Link,
+  logOut: Link,
 };

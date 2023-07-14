@@ -29,7 +29,7 @@ export class SignIn extends Block<Props> {
               type: 'password',
               name: 'password',
               placeholder: 'Password',
-              value: 'Qwerty123',
+              value: 'Qwerty1231',
               className: styles.password,
             }),
             signIn: new Button({

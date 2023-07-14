@@ -40,7 +40,10 @@ export class AuthController {
   public async getUser() {
     try {
       const res = await this.api.getUser();
-      this.store.setState('user', res);
+      const avatar = res.avatar
+        ? `https://ya-praktikum.tech/api/v2/resources${res.avatar}` : undefined;
+
+      this.store.setState('user', { ...res, avatar });
     } catch (err) {
       console.log(err.reason);
     }

@@ -16,7 +16,6 @@ export class ChangePassword extends Block<Props> {
   constructor() {
     super({
       slide: new Slide({
-        // @ts-ignore
         buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           title: 'Change password',

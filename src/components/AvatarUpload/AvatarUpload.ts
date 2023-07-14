@@ -19,7 +19,7 @@ export class AvatarUpload extends Block<Props> {
       classNameLabel: styles.label,
       classNameImg: styles.img,
       classNameBaseImg: styles.imgBase,
-      src: src ? `https://ya-praktikum.tech/api/v2/resources${src}` : '',
+      src,
       baseSrc: !src ? uploadImg : '',
     });
   }

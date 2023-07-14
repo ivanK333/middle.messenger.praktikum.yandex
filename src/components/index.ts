@@ -12,4 +12,4 @@ export { HeaderChatActive } from './HeaderChatActive';
 export { MessageConsole } from './MessageConsole';
 export { ButtonSend } from './ButtonSend';
 export { Message } from './Message';
-export { HeaderSidebarAvatar } from './HeaderSidebarAvatar';
+export { HeaderSidebarAvatar } from './HeaderSidebar/HeaderSidebarAvatar';

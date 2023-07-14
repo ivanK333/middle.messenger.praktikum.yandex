@@ -165,7 +165,9 @@ export class Block<P extends Record<string, unknown> = {}> {
     const { events } = this.props;
     if (!events) return;
     Object.keys(events).forEach((name) => {
-      this._element.removeEventListener(name, events[name as keyof WindowEventMap]);
+      const eventListenerObject = events[name as keyof WindowEventMap] as EventListenerOrEventListenerObject;
+
+      this._element.removeEventListener(name, eventListenerObject);
     });
   }
 
@@ -173,7 +175,9 @@ export class Block<P extends Record<string, unknown> = {}> {
     const { events } = this.props;
     if (!events) return;
     Object.keys(events).forEach((name) => {
-      this._element.addEventListener(name, events[name as keyof WindowEventMap]);
+      const eventListenerObject = events[name as keyof WindowEventMap] as EventListenerOrEventListenerObject;
+
+      this._element.addEventListener(name, eventListenerObject);
     });
   }
 

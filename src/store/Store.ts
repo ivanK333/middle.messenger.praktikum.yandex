@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-import { Block, EventBus } from '../libs';
+import { EventBus } from '../libs';
 import { State, StorageEvent, INITIAL_STATE } from '.';
 import { set } from '../utils';
 
@@ -25,22 +25,4 @@ export class Store extends EventBus {
     set(this._state, path, value);
     this.emit(StorageEvent.UPDATE_STATE, this._state);
   }
-}
-
-const store = new Store();
-export function withStore(mapStateToProps: (state: State) => Record<string, unknown>) {
-  const state = store.getState();
-  return (Component: typeof Block) => class extends Component {
-    constructor(props: any) {
-      const propsFormState = mapStateToProps(state);
-
-      super({ ...props, ...propsFormState });
-
-      store.on(StorageEvent.UPDATE_STATE, () => {
-        const propsFormState = mapStateToProps(state);
-
-        this.setProps(propsFormState as Partial<unknown>);
-      });
-    }
-  };
 }

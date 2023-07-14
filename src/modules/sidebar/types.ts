@@ -8,5 +8,5 @@ export type chat = {
 export type Props = {
   classNameChats?: string,
   header?: HeaderSidebar,
-  chats: ChatPreview[];
+  chats?: ChatPreview[];
 };
