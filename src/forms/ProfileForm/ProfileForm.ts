@@ -4,6 +4,7 @@ import { UserController } from '../../controllers';
 import { Props, Values } from '.';
 import styles from './styles.module.pcss';
 import { VALIDATION_RULES } from '../../appConstants';
+import { State } from '../../store';
 
 export class ProfileForm extends BlockWithStore<Props> {
   private userController: UserController;
@@ -12,6 +13,9 @@ export class ProfileForm extends BlockWithStore<Props> {
     super(props, 'form');
 
     this.userController = new UserController();
+
+    const mapStateToProps = (state: State) => ({ ...state.user });
+    this.withStore(mapStateToProps);
   }
 
   componentDidMount() {

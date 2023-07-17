@@ -12,6 +12,7 @@ export enum BaseValidationRules {
   name = 'name',
   email = 'email',
   phone = 'phone',
+  userID = 'userID',
 }
 
 export const VALIDATION_RULES: Record<keyof typeof BaseValidationRules, Rule> = {
@@ -38,5 +39,9 @@ export const VALIDATION_RULES: Record<keyof typeof BaseValidationRules, Rule> = 
   phone: {
     rule: /^(\+7|8)[0-9]{10,15}$/,
     message: '10 to 15 characters, consists of numbers, may start with a plus',
+  },
+  userID: {
+    rule: /^\d+$/,
+    message: 'Only number',
   },
 };

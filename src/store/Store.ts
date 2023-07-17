@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-classes-per-file
 import { EventBus } from '../libs';
 import { State, StorageEvent, INITIAL_STATE } from '.';
 import { set } from '../utils';
@@ -21,7 +20,10 @@ export class Store extends EventBus {
     return this._state;
   }
 
-  setState(path: string, value: unknown) {
+  setState(path: string, value: unknown, isDebug?: boolean) {
+    if (isDebug) {
+      console.log(2, this);
+    }
     set(this._state, path, value);
     this.emit(StorageEvent.UPDATE_STATE, this._state);
   }

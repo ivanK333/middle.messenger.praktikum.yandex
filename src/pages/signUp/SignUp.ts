@@ -24,12 +24,12 @@ export class SignUp extends Block<Props> {
             email: new Input({
               name: 'email',
               placeholder: 'email',
-              value: 'user@ivan.com',
+              value: 'user@ivan77.com',
             }),
             login: new Input({
               name: 'login',
               placeholder: 'Login',
-              value: 'Ivan77',
+              value: 'Ivan7777',
             }),
             first_name: new Input({
               name: 'first_name',

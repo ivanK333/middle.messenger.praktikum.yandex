@@ -3,7 +3,7 @@ import { InputChat } from '../InputChat';
 import search from '../../../static/img/search.svg';
 import template from './HeaderSidebar.hbs';
 import styles from './styles.module.pcss';
-import { Block, FormValidator } from '../../libs';
+import { BlockWithStore, FormValidator } from '../../libs';
 import {
   Props,
   Values,
@@ -12,9 +12,9 @@ import {
 } from '.';
 import { ROUTES, VALIDATION_RULES } from '../../appConstants';
 import { router } from '../../router';
-import { Store } from '../../store';
+import { State } from '../../store';
 
-export class HeaderSidebar extends Block<Props> {
+export class HeaderSidebar extends BlockWithStore<Props> {
   constructor(props: Props) {
     super({
       ...props,
@@ -36,15 +36,21 @@ export class HeaderSidebar extends Block<Props> {
         },
       }),
     });
+
+    const mapStateToProps = (state: State) => state;
+    this.withStore(mapStateToProps);
   }
 
   componentDidMount() {
-    const store = new Store();
-    const { user } = store.getState();
+    const store = this.store?.getState();
 
-    this.props.avatar?.props?.avatar?.setProps({
-      src: user?.avatar ? user.avatar : '',
+    this.props.avatar?.setProps({
+      name: store?.user?.display_name ? store?.user.display_name : '',
     });
+    this.props.avatar?.props?.avatar?.setProps({
+      src: store?.user?.avatar ? store?.user.avatar : '',
+    });
+
     // eslint-disable-next-line no-new
     new FormValidator<Values>({
       form: this.getContent() as HTMLFormElement,

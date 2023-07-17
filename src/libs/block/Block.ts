@@ -92,13 +92,19 @@ export class Block<P extends Record<string, unknown> = {}> {
     return true;
   }
 
-  public setProps = (nextProps: Partial<BaseBlockProps<P>>) => {
+  public setProps = (nextProps: Partial<BaseBlockProps<P>>, bug?: boolean) => {
     if (!nextProps) {
       return;
     }
 
+    if (bug) {
+      console.log('nextProps', nextProps);
+      console.log('this.props', this.props);
+    }
+
     const props = cloneDeep(this.props);
-    const newProps = cloneDeep({ ...this.props, ...nextProps });
+    const newProps = cloneDeep({ ...props, ...nextProps });
+
     Object.assign(this.props, nextProps);
     this.eventBus().emit(EVENTS.cdu, props, newProps);
   };
@@ -185,7 +191,7 @@ export class Block<P extends Record<string, unknown> = {}> {
     Object.assign(this.props, p);
 
     const children: Block<P>[] | HTMLSpanElement = [];
-    const props: Record<keyof BaseBlockProps<P>, unknown> = p;
+    const props: Record<keyof BaseBlockProps<P>, unknown> = cloneDeep(p) as BaseBlockProps<P>;
 
     Object.keys(props).forEach((key) => {
       if (props[key] instanceof Block) {

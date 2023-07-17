@@ -1,0 +1,1 @@
+export { DelChatModal } from './delChatModal';

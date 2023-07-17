@@ -4,7 +4,7 @@ import {
   SignIn,
   SignUp,
   CreateChat,
-  InfoChat,
+  Settings,
   Chat,
   NotFound,
   InternalError,
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .use(ROUTES.signIn, SignIn)
     .use(ROUTES.signUp, SignUp)
     .use(ROUTES.createChat, CreateChat)
-    .use(ROUTES.infoChat, InfoChat)
+    .use(ROUTES.settings, Settings)
     .use(ROUTES.chat, Chat)
     .use(ROUTES.notFound, NotFound)
     .use(ROUTES.internalError, InternalError)

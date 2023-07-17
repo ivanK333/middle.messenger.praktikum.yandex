@@ -41,7 +41,6 @@ export function isEqual(obj1: PlainObject, obj2: PlainObject): boolean {
 
 export function cloneDeep<T extends object = object>(obj: T) {
   const result: PlainObject = obj instanceof Array ? [] : {};
-
   for (const [key, value] of Object.entries(obj)) {
     if (isObject(value) || isArray(value)) {
       result[key] = cloneDeep(value);
@@ -88,8 +87,8 @@ export function set(object: PlainObject | unknown, path: string, value: unknown)
     return { [currentValue]: previousValue };
   }, {});
 
-  const newData = merge(object as PlainObject, obj2);
+  return merge(object as PlainObject, obj2);
 
-  Object.assign(object as PlainObject, newData);
-  return object;
+  // Object.assign(object as PlainObject, newData);
+  // return object;
 }

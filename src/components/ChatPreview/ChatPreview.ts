@@ -12,10 +12,18 @@ export class ChatPreview extends Block<Props> {
     }, 'button');
   }
 
+  componentDidMount() {
+    if (this.props.test === 'Test20') {
+      // console.log(this?.state?.currentChat?.info?.id);
+    }
+  }
+
   render() {
     const {
       className = '',
       last_message,
+      isCurrentChat,
+      id,
       ...props
     } = this.props;
 

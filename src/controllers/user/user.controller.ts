@@ -4,7 +4,7 @@ import { Store } from '../../store';
 export class UserController {
   public api: UserApi;
 
-  public store: Store;
+  public store;
 
   constructor() {
     this.api = new UserApi();

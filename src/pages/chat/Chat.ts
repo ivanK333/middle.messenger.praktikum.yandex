@@ -6,68 +6,68 @@ import { BlockWithStore } from '../../libs';
 import { Props } from '.';
 import styles from './styles.module.pcss';
 import { ChatController, AuthController } from '../../controllers';
-import { State, Store } from '../../store';
+import { State } from '../../store';
 import { ChatPreview, HeaderSidebar } from '../../components';
-import { UserRes } from '../../api/auth';
-import { ChatsRes } from '../../api/chat';
 
 export class Chat extends BlockWithStore<Props> {
   private chatController: ChatController;
 
   private authController: AuthController;
 
-  constructor() {
+  constructor(props: any) {
     super({
+      ...props,
       dashboard: new Dashboard({
         sidebar: new Sidebar({
-          chats: [],
           header: new HeaderSidebar({ name: '' }),
         }),
         activeChat: new ChatActive({ messages: MESSAGES }),
       }),
     }, 'main');
 
-    const mapStateToProps = (state: State) => ({ ...state.user, ...state.chats });
-    this.withStore(mapStateToProps);
-
     this.chatController = new ChatController();
     this.authController = new AuthController();
 
-    this.chatController.getChats();
-    this.authController.getUser();
+    this.chatController?.getChats();
+    this.authController?.getUser();
+
+    const mapStateToProps = (state: State) => ({ ...state.currentChat, ...state.chats });
+    this.withStore(mapStateToProps, true);
   }
 
-  public setCurrentValueUser(user: UserRes, chats: ChatsRes) {
-    const {
-      display_name,
-      avatar,
-    } = user;
-
+  public setCurrentValueUser() {
+    const avatar = this.state?.user?.avatar;
     const header = this.props?.dashboard?.props?.sidebar?.props?.header;
-    const headerAvatar = header?.props?.avatar?.props?.avatar;
     const sidebar = this.props?.dashboard?.props?.sidebar;
-
-    const chatPreview = chats.map((data) => new ChatPreview({ ...data, events: { click: (e) => console.log(e.target) } }));
-
-    sidebar?.setProps({
-      chats: chatPreview || [],
-    });
+    const activeChat = this.props?.dashboard?.props?.activeChat;
+    const headerAvatar = header?.props?.avatar?.props?.avatar;
 
     headerAvatar?.setProps({
       src: avatar || '',
     });
 
-    header?.setProps({
-      name: display_name || '',
+    activeChat?.props?.header?.setProps({
+      name: this.state?.currentChat?.info?.title,
+    });
+
+    const chatPreviews = this.state?.chats?.map((data) => new ChatPreview({
+      ...data,
+      test: data.title,
+      events: {
+        click: () => this.chatController?.setCurrentChat(data.id),
+        // click: () => console.log(id, data.id),
+      },
+    }));
+
+    sidebar?.setProps({
+      chatPreviews,
     });
   }
 
   componentDidMount() {
-    const store = new Store();
-
-    const { user, chats } = store.getState();
-    if (user) {
-      this.setCurrentValueUser(user, chats || []);
+    console.log('componentDidMount');
+    if (this.state) {
+      this.setCurrentValueUser();
     }
   }
 

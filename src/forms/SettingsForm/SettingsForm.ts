@@ -1,10 +1,10 @@
-import template from './InfoChatForm.hbs';
+import template from './SettingsForm.hbs';
 import { Block, FormValidator } from '../../libs';
 import { Props, Values } from '.';
 import styles from './styles.module.pcss';
 import { VALIDATION_RULES } from '../../appConstants';
 
-export class InfoChatForm extends Block<Props> {
+export class SettingsForm extends Block<Props> {
   constructor(props: Props) {
     super(props, 'form');
   }

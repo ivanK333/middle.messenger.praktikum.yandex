@@ -13,7 +13,7 @@ import { ProfileForm } from '../../forms';
 import { Props } from '.';
 import styles from './styles.module.pcss';
 import { BlockWithStore } from '../../libs';
-import { Store, State } from '../../store';
+import { State } from '../../store';
 import { router } from '../../router';
 import { ROUTES } from '../../appConstants';
 import { UserRes } from '../../api/auth';
@@ -166,12 +166,10 @@ export class Profile extends BlockWithStore<Props> {
   }
 
   componentDidMount() {
-    const store = new Store();
+    const store = this?.store?.getState();
 
-    const { user } = store.getState();
-
-    if (user) {
-      this.setCurrentValueUser(user);
+    if (store?.user) {
+      this.setCurrentValueUser(store?.user);
     }
   }
 

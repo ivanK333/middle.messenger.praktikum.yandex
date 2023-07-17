@@ -1,5 +1,5 @@
 import { Block } from '.';
-import { State, StorageEvent, Store } from '../../store';
+import { Store, State, StorageEvent } from '../../store';
 
 export class BlockWithStore<P extends Record<string, unknown> = {}> extends Block<P> {
   public store: Store;
@@ -13,11 +13,14 @@ export class BlockWithStore<P extends Record<string, unknown> = {}> extends Bloc
     this.state = this.store.getState();
   }
 
-  public withStore(mapStateToProps: (state: State) => Record<string, unknown>) {
+  public withStore(mapStateToProps: (state: State) => Record<string, unknown>, isDebug?: boolean) {
+    if (!this.store) return;
     this.store.on(StorageEvent.UPDATE_STATE, () => {
       const propsFormState = mapStateToProps(this.state);
-
-      this.setProps(propsFormState as Partial<unknown>);
+      if (isDebug) {
+        console.log('withStore', this.props, propsFormState);
+      }
+      this.setProps(propsFormState as Partial<unknown>, isDebug);
     });
   }
 }

@@ -5,7 +5,7 @@ export type Values = {
 };
 
 export type Props = {
-  avatar: AvatarUpload,
+  avatarInput: AvatarUpload,
   display_name: Input,
   save: Button,
 };

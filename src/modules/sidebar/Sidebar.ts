@@ -1,9 +1,10 @@
 import template from './Sidebar.hbs';
 import styles from './styles.module.pcss';
 import { Props } from '.';
-import { Block } from '../../libs';
+import { BlockWithStore } from '../../libs';
+// import { State } from '../../store';
 
-export class Sidebar extends Block<Props> {
+export class Sidebar extends BlockWithStore<Props> {
   render() {
     const {
       className = '',
@@ -13,7 +14,7 @@ export class Sidebar extends Block<Props> {
     return this.compile(template, {
       ...props,
       className: `${styles.sidebar} ${className}`,
-      classNameChats: `${styles.chats} ${className}`,
+      classNameChats: styles.chats,
     });
   }
 }
