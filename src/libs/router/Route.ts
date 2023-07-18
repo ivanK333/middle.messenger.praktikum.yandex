@@ -35,4 +35,8 @@ export class Route {
       renderBlockInRoot(this._props.rootQuery, this._block);
     }
   }
+
+  get isPrivate(): boolean {
+    return this._props.isPrivate;
+  }
 }

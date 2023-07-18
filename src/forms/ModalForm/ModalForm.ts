@@ -23,7 +23,7 @@ export class ModalForm extends Block<Props> {
         id: [VALIDATION_RULES.required, VALIDATION_RULES.userID],
       },
       onSubmit: (values) => {
-        if (this.props.onSubmit) {
+        if (this.props.onSubmit && values.id) {
           this.props.onSubmit(values);
         }
       },

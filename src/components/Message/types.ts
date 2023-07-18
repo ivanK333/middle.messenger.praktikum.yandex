@@ -1,11 +1,11 @@
-export type Props = {
+import { Message } from '../../store';
+
+export type Props = Message & {
   className?: string,
   classNameWrap?: string,
   classNameMessage?: string,
   classNameDate?: string,
   classNameInfo?: string,
-  isOutgoing?: boolean,
-  message: string,
   check?: string,
-  date: string,
+  date?: string,
 };

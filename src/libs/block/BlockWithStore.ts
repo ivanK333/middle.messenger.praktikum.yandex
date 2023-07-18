@@ -13,14 +13,11 @@ export class BlockWithStore<P extends Record<string, unknown> = {}> extends Bloc
     this.state = this.store.getState();
   }
 
-  public withStore(mapStateToProps: (state: State) => Record<string, unknown>, isDebug?: boolean) {
+  public withStore(mapStateToProps: (state: State) => Record<string, unknown>) {
     if (!this.store) return;
     this.store.on(StorageEvent.UPDATE_STATE, () => {
       const propsFormState = mapStateToProps(this.state);
-      if (isDebug) {
-        console.log('withStore', this.props, propsFormState);
-      }
-      this.setProps(propsFormState as Partial<unknown>, isDebug);
+      this.setProps(propsFormState as Partial<unknown>);
     });
   }
 }

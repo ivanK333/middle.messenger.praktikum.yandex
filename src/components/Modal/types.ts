@@ -1,6 +1,7 @@
 import { Block } from '../../libs';
 
 export type Props = {
+  isReset?: boolean,
   classNameModal?: string,
   classNameTitle?: string,
   classNameCloseBtn?: string,

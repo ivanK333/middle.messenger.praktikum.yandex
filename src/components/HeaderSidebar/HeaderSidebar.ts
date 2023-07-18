@@ -24,7 +24,7 @@ export class HeaderSidebar extends BlockWithStore<Props> {
         className: styles.avatar,
         events: {
           click: () => {
-            router.go(ROUTES.profile);
+            router.go(ROUTES.settings);
           },
         },
       }),

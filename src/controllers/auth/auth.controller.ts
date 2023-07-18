@@ -24,7 +24,7 @@ export class AuthController {
       localStorage.setItem(STORAGE_KEYS.isAuth, 'true');
       router.go(ROUTES.chat);
     } catch (err) {
-      console.log(err.reason);
+      console.log(err);
     }
   }
 
@@ -33,7 +33,7 @@ export class AuthController {
       await this.api.signUp(variables);
       router.go(ROUTES.signIn);
     } catch (err) {
-      console.log(err.reason);
+      console.log(err);
     }
   }
 
@@ -45,7 +45,7 @@ export class AuthController {
 
       this.store.setState('user', { ...res, avatar });
     } catch (err) {
-      console.log(err.reason);
+      console.log(err);
     }
   }
 
@@ -56,7 +56,7 @@ export class AuthController {
       this.store.setState('user', undefined);
       router.go(ROUTES.signIn);
     } catch (err) {
-      console.log(err.reason);
+      console.log(err);
     }
   }
 }

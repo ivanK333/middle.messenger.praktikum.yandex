@@ -1,10 +1,20 @@
-import { Block } from '../../libs';
+import { Block, BaseBlockProps } from '../../libs/block';
 import { Props } from '.';
 import template from './Modal.hbs';
 
 import styles from './styles.module.pcss';
 
 export class Modal extends Block<Props> {
+  private initChildren: Props['children'];
+
+  constructor(props: BaseBlockProps<Props>) {
+    super(props);
+
+    if (!this.initChildren) {
+      this.initChildren = props.children;
+    }
+  }
+
   componentDidMount() {
     this._toggleModal();
   }
@@ -27,7 +37,15 @@ export class Modal extends Block<Props> {
   }
 
   hide() {
+    this.resetForm();
     this._element.style.display = 'none';
+  }
+
+  resetForm() {
+    const form = this.getContent().querySelector('form');
+    if (form) {
+      form.reset();
+    }
   }
 
   render() {

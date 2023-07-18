@@ -2,7 +2,6 @@ import template from './Sidebar.hbs';
 import styles from './styles.module.pcss';
 import { Props } from '.';
 import { BlockWithStore } from '../../libs';
-// import { State } from '../../store';
 
 export class Sidebar extends BlockWithStore<Props> {
   render() {

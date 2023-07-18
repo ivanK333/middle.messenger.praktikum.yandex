@@ -88,7 +88,12 @@ export function set(object: PlainObject | unknown, path: string, value: unknown)
   }, {});
 
   return merge(object as PlainObject, obj2);
+}
 
-  // Object.assign(object as PlainObject, newData);
-  // return object;
+export function truncateStringWithColon(inputString: string, maxChars: number) {
+  if (inputString.length <= maxChars) {
+    return `${inputString}`;
+  }
+  const truncatedString = inputString.slice(0, maxChars);
+  return `${truncatedString}...`;
 }

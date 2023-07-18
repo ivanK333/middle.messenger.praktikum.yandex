@@ -1,5 +1,3 @@
-import { Avatar } from '../Avatar';
-import vite from '../../../static/img/vite.svg';
 import template from './HeaderChatActive.hbs';
 import { Props, HeaderCreateActiveSettingsButton } from '.';
 import styles from './styles.module.pcss';
@@ -10,7 +8,6 @@ export class HeaderChatActive extends Block<Props> {
   constructor(props: Props) {
     super({
       ...props,
-      avatar: new Avatar({ src: vite }),
       setting: new HeaderCreateActiveSettingsButton({ items: CHAT_ACTIONS }),
     });
   }

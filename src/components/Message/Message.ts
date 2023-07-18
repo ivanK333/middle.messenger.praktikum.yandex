@@ -12,18 +12,19 @@ export class Message extends Block<Props> {
   render() {
     const {
       className = '',
-      isOutgoing = false,
+      isIncoming = false,
       ...props
     } = this.props;
 
     return this.compile(template, {
       ...props,
-      className: `${isOutgoing ? styles.send : null} ${className}`,
+      className: `${!isIncoming ? styles.send : null} ${className}`,
       classNameWrap: styles.wrap,
       classNameMessage: styles.message,
       classNameDate: styles.date,
       classNameInfo: styles.info,
       check,
+      isIncoming,
     });
   }
 }

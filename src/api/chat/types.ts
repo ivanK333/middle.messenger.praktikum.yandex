@@ -4,14 +4,6 @@ export type Chat = {
   avatar: string,
   unread_count: number,
   last_message: {
-    // user: {
-    //   first_name: string,
-    //   second_name: string,
-    //   avatar: string,
-    //   email: string,
-    //   login: string,
-    //   phone: string,
-    // },
     time: string,
     content: string,
   }
@@ -31,4 +23,16 @@ export type ChatsRes = Chat[];
 export type GetUsersForChatReq = {
   offset?: number,
   limit?: number,
+};
+
+export type RequestTokenForChatReq = {
+  id: number,
+};
+export type RequestTokenForChatRes = {
+  token: string,
+};
+
+export type DeleteUsersFromChatReq = {
+  chatId: number,
+  users: number[],
 };

@@ -20,10 +20,7 @@ export class Store extends EventBus {
     return this._state;
   }
 
-  setState(path: string, value: unknown, isDebug?: boolean) {
-    if (isDebug) {
-      console.log(2, this);
-    }
+  setState(path: string, value: unknown) {
     set(this._state, path, value);
     this.emit(StorageEvent.UPDATE_STATE, this._state);
   }

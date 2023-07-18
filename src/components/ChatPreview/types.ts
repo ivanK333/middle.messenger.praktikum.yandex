@@ -2,7 +2,6 @@ import { Avatar } from '../Avatar';
 
 export type Props = {
   isCurrentChat?: boolean,
-  test?: string,
   className?: string,
   classNameHeader?: string,
   classNameFooter?: string,

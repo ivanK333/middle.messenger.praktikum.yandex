@@ -1,5 +1,7 @@
 import { UserApi, ChangePasswordReq, UserProfileChangeReq } from '../../api/user';
 import { Store } from '../../store';
+import { router } from '../../router';
+import { ROUTES } from '../../appConstants';
 
 export class UserController {
   public api: UserApi;
@@ -15,7 +17,7 @@ export class UserController {
   public async updateAvatar(avatar: File | undefined) {
     try {
       if (!avatar) {
-        throw Error('Загрузите фотографию');
+        throw Error('Upload a photo');
       }
 
       const formData = new FormData();
@@ -39,6 +41,7 @@ export class UserController {
       if (cb) {
         cb();
       }
+      router.go(ROUTES.settings);
     } catch (err) {
       console.log(err);
     }

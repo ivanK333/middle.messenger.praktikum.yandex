@@ -5,7 +5,7 @@ import {
   Meta,
   EVENTS,
 } from './types';
-import { useAccessCheck, isEqual, cloneDeep } from '../../utils';
+import { accessCheck, isEqual, cloneDeep } from '../../utils';
 
 export class Block<P extends Record<string, unknown> = {}> {
   public props: BaseBlockProps<P>;
@@ -92,14 +92,9 @@ export class Block<P extends Record<string, unknown> = {}> {
     return true;
   }
 
-  public setProps = (nextProps: Partial<BaseBlockProps<P>>, bug?: boolean) => {
+  public setProps = (nextProps: Partial<BaseBlockProps<P>>) => {
     if (!nextProps) {
       return;
-    }
-
-    if (bug) {
-      console.log('nextProps', nextProps);
-      console.log('this.props', this.props);
     }
 
     const props = cloneDeep(this.props);
@@ -139,7 +134,7 @@ export class Block<P extends Record<string, unknown> = {}> {
   private _makePropsProxy(props: BaseBlockProps<P>) {
     return new Proxy(props, {
       get(target, prop) {
-        const isAccessGranted = useAccessCheck(prop);
+        const isAccessGranted = accessCheck(prop);
         if (!isAccessGranted) {
           throw new Error('No access');
         }
@@ -151,7 +146,7 @@ export class Block<P extends Record<string, unknown> = {}> {
       },
 
       set(target, prop, value) {
-        const isAccessGranted = useAccessCheck(prop);
+        const isAccessGranted = accessCheck(prop);
 
         if (!isAccessGranted) {
           throw new Error('No access');

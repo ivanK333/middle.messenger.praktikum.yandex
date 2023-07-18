@@ -5,6 +5,7 @@ import template from './InternalError.hbs';
 import { Block } from '../../libs';
 import { Props } from '.';
 import styles from './styles.module.pcss';
+import { router } from '../../router';
 
 export class InternalError extends Block<Props> {
   constructor() {
@@ -14,6 +15,9 @@ export class InternalError extends Block<Props> {
         title: 'We are already fixing',
         link: new Link({
           children: 'Back to Chats',
+          events: {
+            click: () => router.back(-2),
+          },
         }),
       }),
     });

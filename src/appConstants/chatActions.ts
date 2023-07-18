@@ -1,4 +1,3 @@
-import { ROUTES } from './routes';
 import del_user from '../../static/img/del_user.svg';
 import settings from '../../static/img/settings.svg';
 import circle_plus from '../../static/img/circle_plus.svg';
@@ -6,7 +5,6 @@ import reject from '../../static/img/reject.svg';
 import {
   HeaderCreateActiveSettingsButtonListItem,
 } from '../components/HeaderChatActive/HeaderCreateActiveSettingsButton';
-import { router } from '../router';
 
 export const actions = [
   {
@@ -21,9 +19,8 @@ export const actions = [
   },
   {
     src: settings,
-    name: 'settings',
-    children: 'Settings',
-    cb: () => router.go(ROUTES.settings),
+    name: 'chatSettings',
+    children: 'Chat settings',
   },
   {
     src: reject,
@@ -35,13 +32,9 @@ export const actions = [
 export const CHAT_ACTIONS = actions.map(({
   children,
   src,
-  cb,
   name,
 }) => new HeaderCreateActiveSettingsButtonListItem({
   children,
   src,
   name,
-  events: {
-    click: cb,
-  },
 }));

@@ -1,5 +1,6 @@
 import { Route } from '.';
 import { BlockConstructor } from '../block';
+import { ROUTES, STORAGE_KEYS } from '../../appConstants';
 
 export class Router {
   private static __instance: Router | null;
@@ -23,8 +24,8 @@ export class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: BlockConstructor) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  use(pathname: string, block: BlockConstructor, isPrivate: boolean = false) {
+    const route = new Route(pathname, block, { rootQuery: this._rootQuery, isPrivate });
     this.routes.push(route);
 
     return this;
@@ -44,8 +45,30 @@ export class Router {
     const route = this.getRoute(pathname);
 
     if (route) {
-      route.render();
+      const isAuth = Router._checkIsAuth();
+
+      if (ROUTES.notFound !== pathname) {
+        if (route.isPrivate && !isAuth) {
+          this.go(ROUTES.signIn);
+          return;
+        }
+
+        if (!route.isPrivate && isAuth) {
+          this.go(ROUTES.chat);
+          return;
+        }
+      }
+
+      if (route.match(window.location.pathname)) {
+        route.render();
+      }
+      return;
     }
+    this.go(ROUTES.notFound);
+  }
+
+  private static _checkIsAuth(): boolean {
+    return localStorage.getItem(STORAGE_KEYS.isAuth) === 'true';
   }
 
   go(pathname: string) {
@@ -53,8 +76,12 @@ export class Router {
     this._onRoute(pathname);
   }
 
-  back() {
-    this.history.back();
+  back(num?: number) {
+    if (!num) {
+      this.history.back();
+      return;
+    }
+    this.history.go(num);
   }
 
   forward() {

@@ -1,8 +1,8 @@
 import template from './ChatPreview.hbs';
 import { Avatar } from '../Avatar';
 import { Block, BaseBlockProps } from '../../libs/block';
+import { truncateStringWithColon } from '../../utils';
 import { Props } from '.';
-import vite from '../../../static/img/vite.svg';
 import styles from './styles.module.pcss';
 
 export class ChatPreview extends Block<Props> {
@@ -12,18 +12,11 @@ export class ChatPreview extends Block<Props> {
     }, 'button');
   }
 
-  componentDidMount() {
-    if (this.props.test === 'Test20') {
-      // console.log(this?.state?.currentChat?.info?.id);
-    }
-  }
-
   render() {
     const {
       className = '',
       last_message,
       isCurrentChat,
-      id,
       ...props
     } = this.props;
 
@@ -31,10 +24,15 @@ export class ChatPreview extends Block<Props> {
       ? new Date(last_message.time || '').toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       : undefined;
 
+    const currentChatAvatar = props.avatar ? `https://ya-praktikum.tech/api/v2/resources${props.avatar}` : '';
+
     return this.compile(template, {
       ...props,
-      last_message,
-      className: `${styles.container} ${className}`,
+      last_message: {
+        ...last_message,
+        content: truncateStringWithColon(last_message?.content || '', 60),
+      },
+      className: `${styles.container} ${className} ${isCurrentChat ? styles.active : ''}`,
       classNameHeader: styles.header,
       classNameFooter: styles.footer,
       classNameDate: styles.date,
@@ -42,7 +40,7 @@ export class ChatPreview extends Block<Props> {
       classNameMessage: styles.message,
       classNameCount: styles.count,
       classNameWrapper: styles.wrapper,
-      avatarInput: new Avatar({ src: vite }),
+      avatarInput: new Avatar({ src: currentChatAvatar }),
       time,
     });
   }

@@ -2,10 +2,13 @@
 <div class="{{classNameWrapper}}">
     <div class="{{classNameHeader}}">
         <h4 class="{{classNameTitle}}">{{title}}</h4>
-        <span class="{{classNameDate}}">{{date}}</span>
+        <span class="{{classNameDate}}">{{time}}</span>
     </div>
     <div class="{{classNameFooter}}">
-        <p class="{{classNameMessage}}">{{content}}</p>
-        <span class="{{classNameCount}}">{{unread_count}}</span>
+        <p class="{{classNameMessage}}">{{last_message.content}}</p>
+
+        {{#if unread_count}}
+            <span class="{{classNameCount}}">{{unread_count}}</span>
+        {{/if}}
     </div>
 </div>

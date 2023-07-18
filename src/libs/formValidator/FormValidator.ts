@@ -31,6 +31,7 @@ export class FormValidator<V extends object = {}> {
   private _init() {
     this._detach();
     this.form.addEventListener('submit', (e) => this._handleSubmit(e));
+    this.form.addEventListener('reset', () => this.resetForm());
     this._registerInputEvents();
   }
 
@@ -90,6 +91,7 @@ export class FormValidator<V extends object = {}> {
         }
         return error;
       }
+
       inputContainer.classList.remove(styles.error);
       if (errorContainer) {
         errorContainer.textContent = '';
@@ -116,6 +118,7 @@ export class FormValidator<V extends object = {}> {
 
   private _detach() {
     this.form.removeEventListener('submit', (e) => this._handleSubmit(e));
+    this.form.removeEventListener('reset', () => this.resetForm());
     this.inputContainers.forEach((inputContainer: HTMLDivElement) => {
       const input = inputContainer.querySelector('input') as HTMLInputElement;
       input.removeEventListener('blur', () => this._validateInput(input));
@@ -133,9 +136,21 @@ export class FormValidator<V extends object = {}> {
     }
   }
 
+  private _resetErrors() {
+    this.inputContainers.forEach((inputContainer: HTMLDivElement) => {
+      const errorContainer = inputContainer.querySelector('span') as HTMLSpanElement;
+
+      inputContainer.classList.remove(styles.error);
+      if (errorContainer) {
+        errorContainer.textContent = '';
+      }
+    });
+  }
+
   public resetForm() {
+    this._resetErrors();
+
     this.form.reset();
     this.values = {} as V;
-    this.inputContainers = [];
   }
 }

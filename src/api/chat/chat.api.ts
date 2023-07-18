@@ -4,6 +4,9 @@ import {
   ChatsRes,
   CreateChatReq,
   GetUsersForChatReq,
+  RequestTokenForChatReq,
+  RequestTokenForChatRes,
+  DeleteUsersFromChatReq, Chat,
 } from '.';
 
 export class ChatApi extends BaseApi {
@@ -30,6 +33,34 @@ export class ChatApi extends BaseApi {
   public getUsersForChat(chatId: number, variables: GetUsersForChatReq) {
     return this.http.get(`chats/${chatId}/users`, {
       data: variables,
+      withCredentials: true,
+    });
+  }
+
+  public requestTokenForChat(chatId: number) {
+    return this.http.post<RequestTokenForChatReq, RequestTokenForChatRes>(`chats/token/${chatId}/`, {
+      data: { id: chatId },
+      withCredentials: true,
+    });
+  }
+
+  public deleteChatById(chatId: number) {
+    return this.http.delete('chats/', {
+      data: { chatId },
+      withCredentials: true,
+    });
+  }
+
+  public deleteUsersFromChat(variables: DeleteUsersFromChatReq) {
+    return this.http.delete<DeleteUsersFromChatReq, void>('chats/users/', {
+      data: variables,
+      withCredentials: true,
+    });
+  }
+
+  public updateAvatar(formData: FormData): Promise<Chat> {
+    return this.http.put('chats/avatar', {
+      data: formData,
       withCredentials: true,
     });
   }
