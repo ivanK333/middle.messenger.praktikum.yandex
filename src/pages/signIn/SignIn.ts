@@ -24,14 +24,12 @@ export class SignIn extends Block<Props> {
               type: 'text',
               name: 'login',
               placeholder: 'Login',
-              value: 'Ivan77',
               className: styles.login,
             }),
             password: new Input({
               type: 'password',
               name: 'password',
               placeholder: 'Password',
-              value: 'Qwerty1231',
               className: styles.password,
             }),
             signIn: new Button({
