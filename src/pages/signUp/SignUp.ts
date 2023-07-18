@@ -4,7 +4,6 @@ import {
   Link,
   Card,
 } from '../../components';
-import { ROUTES } from '../../appConstants';
 import { Slide } from '../../layouts';
 import { SignUpForm } from '../../forms';
 import template from './SignUp.hbs';
@@ -12,6 +11,8 @@ import { Block } from '../../libs';
 import { Props } from '.';
 
 import styles from './styles.module.pcss';
+import { router } from '../../router';
+import { ROUTES } from '../../appConstants';
 
 export class SignUp extends Block<Props> {
   constructor() {
@@ -23,42 +24,51 @@ export class SignUp extends Block<Props> {
             email: new Input({
               name: 'email',
               placeholder: 'email',
+              value: 'user@ivan777.com',
             }),
             login: new Input({
               name: 'login',
               placeholder: 'Login',
+              value: 'Ivan77777',
             }),
-            firstName: new Input({
-              name: 'firstName',
+            first_name: new Input({
+              name: 'first_name',
               placeholder: 'First name',
+              value: 'Ivan',
             }),
-            secondName: new Input({
-              name: 'secondName',
+            second_name: new Input({
+              name: 'second_name',
               placeholder: 'Second name',
+              value: 'Ivanov',
             }),
             phone: new Input({
               name: 'phone',
               placeholder: 'Phone',
+              value: '+71231232332',
             }),
             password: new Input({
               type: 'password',
               name: 'password',
               placeholder: 'Password',
+              value: 'Qwerty123',
             }),
-            repeatPassword: new Input({
+            repeat_password: new Input({
               type: 'password',
-              name: 'repeatPassword',
+              name: 'repeat_password',
               placeholder: 'Repeat password',
+              value: 'Qwerty123',
             }),
-            signUp: new Button({
+            sign_up: new Button({
               type: 'submit',
               view: 'default',
               children: 'Sign up',
               name: 'sign_up',
             }),
-            signIn: new Link({
+            sign_in: new Link({
               children: 'Sign in',
-              href: ROUTES.signIn,
+              events: {
+                click: () => { router.go(ROUTES.signIn); },
+              },
             }),
           }),
         }),

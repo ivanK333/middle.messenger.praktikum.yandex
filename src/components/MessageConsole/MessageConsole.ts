@@ -4,10 +4,10 @@ import staple from '../../../static/img/staple.svg';
 import template from './MessageConsole.hbs';
 import styles from './styles.module.pcss';
 import { Props, Values } from '.';
-import { Block, FormValidator } from '../../libs';
+import { BlockWithStore, FormValidator } from '../../libs';
 import { VALIDATION_RULES } from '../../appConstants';
 
-export class MessageConsole extends Block<Props> {
+export class MessageConsole extends BlockWithStore<Props> {
   constructor(props: Props) {
     super({
       ...props,
@@ -17,7 +17,7 @@ export class MessageConsole extends Block<Props> {
         name: 'message',
       }),
       button: new ButtonSend({}),
-    }, 'form');
+    });
   }
 
   componentDidMount() {
@@ -27,7 +27,11 @@ export class MessageConsole extends Block<Props> {
       fields: {
         message: [VALIDATION_RULES.required],
       },
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        if (this.props.onSubmit) {
+          this.props.onSubmit(values.message);
+        }
+      },
     });
   }
 

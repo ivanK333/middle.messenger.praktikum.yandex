@@ -1,11 +1,10 @@
-import { Input, Button, AvatarUpload } from '../../components';
+import { Input, Button } from '../../components';
 
 export type Values = {
-  chatName: string
+  display_name: string
 };
 
 export type Props = {
-  avatar: AvatarUpload,
-  chatName: Input,
+  display_name: Input,
   create: Button,
 };

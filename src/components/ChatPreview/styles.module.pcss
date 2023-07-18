@@ -4,14 +4,20 @@
 .container {
   @mixin flexbox initial;
 
+  border: none;
   border-bottom: 1px solid $color-line;
   padding: 10px 16px 11px;
   width: 100%;
   cursor: pointer;
+  background: transparent;
 
   &:hover {
     background: $color-palette-lightblue-4;
   }
+}
+
+.active {
+  background: $color-palette-lightblue-4;
 }
 
 .wrapper {
@@ -49,6 +55,7 @@
 .message {
   @mixin typography-text-m;
 
+  text-align: left;
   color: $color-text-grey;
   margin-right: 8px;
 }

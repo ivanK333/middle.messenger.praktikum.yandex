@@ -8,6 +8,7 @@ export class AvatarUpload extends Block<Props> {
   render() {
     const {
       className = '',
+      src,
       ...props
     } = this.props;
 
@@ -17,7 +18,9 @@ export class AvatarUpload extends Block<Props> {
       classNameInput: styles.input,
       classNameLabel: styles.label,
       classNameImg: styles.img,
-      src: uploadImg,
+      classNameBaseImg: styles.imgBase,
+      src,
+      baseSrc: !src ? uploadImg : '',
     });
   }
 }

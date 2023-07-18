@@ -1,7 +1,16 @@
 {{{header}}}
 <ul class="{{classNameChat}}">
-    {{#each messages}}
+    {{#each messageComponents}}
         {{{this}}}
     {{/each}}
 </ul>
+{{#if isEmpty}}
+    <div class="{{classNameEmpty}}">
+        There's nothing here yet.
+    </div>
+{{/if}}
 {{{messageConsole}}}
+{{{addUser}}}
+{{{deleteUser}}}
+{{{deleteChat}}}
+{{{chatSettings}}}

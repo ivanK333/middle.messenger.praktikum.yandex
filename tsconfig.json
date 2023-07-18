@@ -14,7 +14,6 @@
     "skipLibCheck": true,
     "declaration": false,
     "types": ["vite/client"],
-
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

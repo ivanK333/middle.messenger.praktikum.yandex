@@ -1,5 +1,10 @@
-<img src="{{src}}" class="{{classNameImg}}" alt="{{alt}}" />
+{{#if src}}
+    <img src="{{src}}" class="{{classNameImg}}" alt="{{alt}}" />
+{{/if}}
 
+{{#if baseSrc}}
+    <img src="{{baseSrc}}" class="{{classNameImgBase}}" alt="{{alt}}" />
+{{/if}}
 <input id="input_file" class="{{classNameInput}}" type="file" />
 <label for="input_file" class="{{classNameLabel}}">
     <span>Change avatar</span>

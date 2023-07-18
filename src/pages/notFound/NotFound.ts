@@ -3,9 +3,9 @@ import { Link } from '../../components';
 import template from './NotFound.hbs';
 import { Props } from '.';
 
-import { ROUTES } from '../../appConstants';
 import { Block } from '../../libs';
 import styles from './styles.module.pcss';
+import { router } from '../../router';
 
 export class NotFound extends Block<Props> {
   constructor() {
@@ -15,7 +15,9 @@ export class NotFound extends Block<Props> {
         title: 'Wrong place',
         link: new Link({
           children: 'Back to Chats',
-          href: ROUTES.chat,
+          events: {
+            click: () => router.back(-2),
+          },
         }),
       }),
     });

@@ -5,9 +5,9 @@ import {
   Meta,
   EVENTS,
 } from './types';
-import { useAccessCheck } from '../../utils';
+import { accessCheck, isEqual, cloneDeep } from '../../utils';
 
-export class Block<P extends Record<string, unknown>> {
+export class Block<P extends Record<string, unknown> = {}> {
   public props: BaseBlockProps<P>;
 
   public readonly eventBus: () => EventBus;
@@ -76,15 +76,19 @@ export class Block<P extends Record<string, unknown>> {
     this.eventBus().emit(EVENTS.cdm);
   }
 
-  private _componentDidUpdate() {
-    const response = this.componentDidUpdate();
+  private _componentDidUpdate(prevProps: P, newProps: P) {
+    const response = this.componentDidUpdate(prevProps, newProps);
 
     if (response) {
       this.eventBus().emit(EVENTS.render);
     }
   }
 
-  public componentDidUpdate() {
+  public componentDidUpdate(prevProps: P, nextProps: P) {
+    if (prevProps && nextProps) {
+      return !isEqual(prevProps, nextProps);
+    }
+
     return true;
   }
 
@@ -93,8 +97,11 @@ export class Block<P extends Record<string, unknown>> {
       return;
     }
 
+    const props = cloneDeep(this.props);
+    const newProps = cloneDeep({ ...props, ...nextProps });
+
     Object.assign(this.props, nextProps);
-    this.eventBus().emit(EVENTS.cdu, this.props, nextProps);
+    this.eventBus().emit(EVENTS.cdu, props, newProps);
   };
 
   get element(): HTMLElement {
@@ -127,7 +134,7 @@ export class Block<P extends Record<string, unknown>> {
   private _makePropsProxy(props: BaseBlockProps<P>) {
     return new Proxy(props, {
       get(target, prop) {
-        const isAccessGranted = useAccessCheck(prop);
+        const isAccessGranted = accessCheck(prop);
         if (!isAccessGranted) {
           throw new Error('No access');
         }
@@ -139,7 +146,7 @@ export class Block<P extends Record<string, unknown>> {
       },
 
       set(target, prop, value) {
-        const isAccessGranted = useAccessCheck(prop);
+        const isAccessGranted = accessCheck(prop);
 
         if (!isAccessGranted) {
           throw new Error('No access');
@@ -159,7 +166,9 @@ export class Block<P extends Record<string, unknown>> {
     const { events } = this.props;
     if (!events) return;
     Object.keys(events).forEach((name) => {
-      this._element.removeEventListener(name, events[name as keyof WindowEventMap]);
+      const eventListenerObject = events[name as keyof WindowEventMap] as EventListenerOrEventListenerObject;
+
+      this._element.removeEventListener(name, eventListenerObject);
     });
   }
 
@@ -167,7 +176,9 @@ export class Block<P extends Record<string, unknown>> {
     const { events } = this.props;
     if (!events) return;
     Object.keys(events).forEach((name) => {
-      this._element.addEventListener(name, events[name as keyof WindowEventMap]);
+      const eventListenerObject = events[name as keyof WindowEventMap] as EventListenerOrEventListenerObject;
+
+      this._element.addEventListener(name, eventListenerObject);
     });
   }
 
@@ -175,7 +186,7 @@ export class Block<P extends Record<string, unknown>> {
     Object.assign(this.props, p);
 
     const children: Block<P>[] | HTMLSpanElement = [];
-    const props: Record<keyof BaseBlockProps<P>, unknown> = p;
+    const props: Record<keyof BaseBlockProps<P>, unknown> = cloneDeep(p) as BaseBlockProps<P>;
 
     Object.keys(props).forEach((key) => {
       if (props[key] instanceof Block) {

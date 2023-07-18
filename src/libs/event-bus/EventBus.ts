@@ -30,7 +30,6 @@ export class EventBus {
     if (!this.listeners[event]) {
       throw new Error(`Unknown event: ${event}`);
     }
-
     this.listeners[event].forEach((listener) => {
       listener(...arg);
     });

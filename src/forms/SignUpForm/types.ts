@@ -3,21 +3,21 @@ import { Input, Button, Link } from '../../components';
 export type Values = {
   email: string,
   login: string,
-  firstName: string,
-  secondName: string,
+  first_name: string,
+  second_name: string,
   phone: string,
   password: string,
-  repeatPassword: string,
+  repeat_password: string,
 };
 
 export type Props = {
   email: Input,
   login: Input,
-  firstName: Input,
-  secondName: Input,
+  first_name: Input,
+  second_name: Input,
   phone: Input,
   password: Input,
-  repeatPassword: Input,
-  signUp: Button,
-  signIn: Link,
+  repeat_password: Input,
+  sign_up: Button,
+  sign_in: Link,
 };

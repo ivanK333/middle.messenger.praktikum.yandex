@@ -1,0 +1,26 @@
+@import url("../../../../styles/_variables.pcss");
+@import url("../../../../styles/_mixins.pcss");
+
+.img {
+  margin-right: 16px;
+}
+
+.button {
+  @mixin typography-text-m;
+  @mixin flexbox center, flex-start;
+
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 8px 16px;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-palette-lightblue-4;
+
+    .img {
+      fill: #dd2929;
+    }
+  }
+}

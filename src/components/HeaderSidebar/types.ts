@@ -1,5 +1,5 @@
 import { InputChat } from '../InputChat';
-import { Avatar } from '../Avatar';
+import { HeaderSidebarAvatar, HeaderSidebarCreateChatButton } from '.';
 
 export type Values = {
   search: string,
@@ -8,11 +8,10 @@ export type Values = {
 export type Props = {
   className?: string,
   classNameUserInfo?: string,
-  classNameButton?: string,
   classNameAvatar?: string,
   classNameName?: string,
-  avatar?: Avatar,
-  img?: string,
+  avatar?: HeaderSidebarAvatar,
+  button?: HeaderSidebarCreateChatButton,
   search?: InputChat,
   name: string,
 };

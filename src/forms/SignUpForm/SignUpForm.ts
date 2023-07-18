@@ -1,12 +1,17 @@
 import template from './SignUpForm.hbs';
+import { AuthController } from '../../controllers';
 import { Block, FormValidator } from '../../libs';
 import { Props, Values } from '.';
 import styles from './styles.module.pcss';
 import { VALIDATION_RULES } from '../../appConstants';
 
 export class SignUpForm extends Block<Props> {
+  private controller: AuthController;
+
   constructor(props: Props) {
     super(props, 'form');
+
+    this.controller = new AuthController();
   }
 
   componentDidMount() {
@@ -16,11 +21,11 @@ export class SignUpForm extends Block<Props> {
       fields: {
         email: [VALIDATION_RULES.required, VALIDATION_RULES.email],
         login: [VALIDATION_RULES.required, VALIDATION_RULES.login],
-        firstName: [VALIDATION_RULES.required, VALIDATION_RULES.name],
-        secondName: [VALIDATION_RULES.required, VALIDATION_RULES.name],
+        first_name: [VALIDATION_RULES.required, VALIDATION_RULES.name],
+        second_name: [VALIDATION_RULES.required, VALIDATION_RULES.name],
         phone: [VALIDATION_RULES.required, VALIDATION_RULES.phone],
         password: [VALIDATION_RULES.required, VALIDATION_RULES.password],
-        repeatPassword: [
+        repeat_password: [
           VALIDATION_RULES.required,
           {
             rule: VALIDATION_RULES.password.rule,
@@ -29,7 +34,10 @@ export class SignUpForm extends Block<Props> {
           },
         ],
       },
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        const { repeat_password, ...variables } = values;
+        this.controller.signUp(variables);
+      },
     });
   }
 

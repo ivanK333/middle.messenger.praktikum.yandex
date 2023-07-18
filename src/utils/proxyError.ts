@@ -1,4 +1,4 @@
-export const useAccessCheck = (value: string | symbol) => {
+export const accessCheck = (value: string | symbol) => {
   let i = 0;
   if (typeof value === 'string') {
     while (value.charAt(i) === '_') {

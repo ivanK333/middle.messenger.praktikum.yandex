@@ -6,11 +6,12 @@ import {
 } from '../../components';
 import { SignInForm } from '../../forms';
 import template from './SignIn.hbs';
-import { ROUTES } from '../../appConstants';
 import { Slide } from '../../layouts';
 import { Block } from '../../libs';
 import { Props } from '.';
 import styles from './styles.module.pcss';
+import { router } from '../../router';
+import { ROUTES } from '../../appConstants';
 
 export class SignIn extends Block<Props> {
   constructor() {
@@ -23,12 +24,14 @@ export class SignIn extends Block<Props> {
               type: 'text',
               name: 'login',
               placeholder: 'Login',
+              value: 'Ivan77',
               className: styles.login,
             }),
             password: new Input({
               type: 'password',
               name: 'password',
               placeholder: 'Password',
+              value: 'Qwerty1231',
               className: styles.password,
             }),
             signIn: new Button({
@@ -40,7 +43,9 @@ export class SignIn extends Block<Props> {
             }),
             signUp: new Link({
               children: 'Sign up',
-              href: ROUTES.signUp,
+              events: {
+                click: () => router.go(ROUTES.signUp),
+              },
             }),
           }),
         }),
