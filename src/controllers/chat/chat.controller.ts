@@ -1,7 +1,7 @@
 import { AddUserChatReq, ChatApi, CreateChatReq } from '../../api/chat';
 import { Store } from '../../store';
 import { router } from '../../router';
-import { ROUTES } from '../../appConstants';
+import { ROUTES, STORAGE_KEYS } from '../../appConstants';
 import { UserRes } from '../../api/auth';
 import { WsMessage } from '../../types';
 
@@ -163,8 +163,9 @@ export class ChatController {
   public async initializeSocket(chatId: number, userId: number) {
     if (!this.wsListeners[chatId]) {
       const token = await this.connectToChat(chatId);
+      const isAuth = localStorage.getItem(STORAGE_KEYS.isAuth) === 'true';
 
-      if (token) {
+      if (token && isAuth) {
         const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
 
         socket.addEventListener('open', () => {
