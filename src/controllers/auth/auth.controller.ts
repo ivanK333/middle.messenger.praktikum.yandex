@@ -24,6 +24,9 @@ export class AuthController {
       localStorage.setItem(STORAGE_KEYS.isAuth, 'true');
       router.go(ROUTES.chat);
     } catch (err) {
+      if (err.reason === 'User already in system') {
+        router.go(ROUTES.chat);
+      }
       console.log(err);
     }
   }
