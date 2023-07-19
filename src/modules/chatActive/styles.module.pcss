@@ -1,5 +1,4 @@
 @import url("../../styles/_mixins.pcss");
-@import url("../../styles/_variables.pcss");
 
 .chatActive {
   display: flex;
@@ -9,15 +8,19 @@
 }
 
 .chat {
-  @mixins flexbox initial flex-end;
+  @mixin flexbox initial flex-end;
 
   flex-direction: column;
   overflow-y: scroll;
   height: 100%;
 }
 
+.chatHide {
+  display: none;
+}
+
 .titleEmpty {
-  @mixins flexbox;
+  @mixin flexbox;
 
   text-align: center;
   width: 100%;

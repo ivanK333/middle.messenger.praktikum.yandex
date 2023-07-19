@@ -132,6 +132,7 @@ export class ChatActive extends BlockWithStore<Props> {
       messages,
       messageConsole,
       header,
+      isEmpty,
       ...props
     } = this.props;
 
@@ -139,8 +140,9 @@ export class ChatActive extends BlockWithStore<Props> {
 
     return this.compile(template, {
       ...props,
+      isEmpty,
       className: `${styles.chatActive} ${className}`,
-      classNameChat: styles.chat,
+      classNameChat: `${!isEmpty ? styles.chat : styles.chatHide}`,
       classNameEmpty: styles.titleEmpty,
       messageComponents,
       header: this.props?.header?.props.name ? header : undefined,
