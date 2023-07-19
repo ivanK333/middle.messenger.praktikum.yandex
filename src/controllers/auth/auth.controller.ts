@@ -25,6 +25,7 @@ export class AuthController {
       router.go(ROUTES.chat);
     } catch (err) {
       if (err.reason === 'User already in system') {
+        localStorage.setItem(STORAGE_KEYS.isAuth, 'true');
         router.go(ROUTES.chat);
       }
       console.log(err);
@@ -36,9 +37,6 @@ export class AuthController {
       await this.api.signUp(variables);
       router.go(ROUTES.signIn);
     } catch (err) {
-      if (err.reason === 'User already in system') {
-        router.go(ROUTES.chat);
-      }
       console.log(err);
     }
   }
