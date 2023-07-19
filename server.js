@@ -12,10 +12,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
-
-  if (res.req.url === '/404') {
-    res.sendStatus(404);
-  }
 });
 
 app.listen(PORT, function () {
