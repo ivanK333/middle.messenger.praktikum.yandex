@@ -6,6 +6,8 @@ export type Values = {
 };
 
 export type Props = {
+  onSubmit?: (message: string) => void,
+  chatId?: number,
   className?: string,
   classNameForm?: string,
   classNameImg?: string,

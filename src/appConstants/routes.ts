@@ -1,12 +1,10 @@
 export const ROUTES = {
   signIn: '/',
   signUp: '/sign-up',
-  profile: '/profile',
+  settings: '/settings',
   changePassword: '/change-password',
   createChat: '/create-chat',
-  infoChat: '/info-chat',
-  chat: '/chat',
+  chat: '/messenger',
   notFound: '/404',
   internalError: '/500',
-  test: '/test',
 };

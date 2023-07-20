@@ -2,7 +2,7 @@
 @import url("../../styles/_mixins.pcss");
 
 .header {
-  @mixin flexbox center, flex-start;
+  @mixin flexbox center, space-between;
 
   padding: 12px 16px;
   border-bottom: solid 1px $color-line;
@@ -12,4 +12,8 @@
   @mixin typography-text-xl;
 
   margin-left: 12px;
+}
+
+.avatar {
+  @mixin flexbox;
 }

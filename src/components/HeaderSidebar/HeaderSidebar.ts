@@ -1,23 +1,56 @@
 import { Avatar } from '../Avatar';
 import { InputChat } from '../InputChat';
-import newChat from '../../../static/img/new_chat.svg';
 import search from '../../../static/img/search.svg';
 import template from './HeaderSidebar.hbs';
 import styles from './styles.module.pcss';
-import { Block, FormValidator } from '../../libs';
-import { Props, Values } from '.';
-import { VALIDATION_RULES } from '../../appConstants';
+import { BlockWithStore, FormValidator } from '../../libs';
+import {
+  Props,
+  Values,
+  HeaderSidebarAvatar,
+  HeaderSidebarCreateChatButton,
+} from '.';
+import { ROUTES, VALIDATION_RULES } from '../../appConstants';
+import { router } from '../../router';
+import { State } from '../../store';
 
-export class HeaderSidebar extends Block<Props> {
+export class HeaderSidebar extends BlockWithStore<Props> {
   constructor(props: Props) {
     super({
       ...props,
       search: new InputChat({ img: search, name: 'search' }),
-      avatar: new Avatar({ src: '' }),
+      avatar: new HeaderSidebarAvatar({
+        avatar: new Avatar({ src: '' }),
+        className: styles.avatar,
+        events: {
+          click: () => {
+            router.go(ROUTES.settings);
+          },
+        },
+      }),
+      button: new HeaderSidebarCreateChatButton({
+        events: {
+          click: () => {
+            router.go(ROUTES.createChat);
+          },
+        },
+      }),
     });
+
+    const mapStateToProps = (state: State) => state;
+    this.withStore(mapStateToProps);
   }
 
   componentDidMount() {
+    const store = this.store?.getState();
+
+    this.props.avatar?.setProps({
+      name: store?.user?.display_name ? store?.user.display_name : '',
+    });
+    this.props.avatar?.props?.avatar?.setProps({
+      src: store?.user?.avatar ? store?.user.avatar : '',
+    });
+
     // eslint-disable-next-line no-new
     new FormValidator<Values>({
       form: this.getContent() as HTMLFormElement,
@@ -38,10 +71,8 @@ export class HeaderSidebar extends Block<Props> {
       ...props,
       className: `${styles.header} ${className}`,
       classNameUserInfo: styles.userInfo,
-      classNameButton: styles.button,
       classNameAvatar: styles.avatar,
       classNameName: styles.name,
-      img: newChat,
     });
   }
 }

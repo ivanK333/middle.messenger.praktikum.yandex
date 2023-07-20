@@ -3,10 +3,15 @@ import { Block, FormValidator } from '../../libs';
 import { Props, Values } from '.';
 import styles from './styles.module.pcss';
 import { VALIDATION_RULES } from '../../appConstants';
+import { ChatController } from '../../controllers';
 
 export class CreateChatForm extends Block<Props> {
+  private controller: ChatController;
+
   constructor(props: Props) {
     super(props, 'form');
+
+    this.controller = new ChatController();
   }
 
   componentDidMount() {
@@ -16,7 +21,9 @@ export class CreateChatForm extends Block<Props> {
       fields: {
         display_name: [VALIDATION_RULES.required],
       },
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        this.controller.createChat({ title: values.display_name });
+      },
     });
   }
 

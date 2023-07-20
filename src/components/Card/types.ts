@@ -3,13 +3,12 @@ import {
   CreateChatForm,
   SignInForm,
   SignUpForm,
-  InfoChatForm,
-  ProfileForm,
+  SettingsForm,
 } from '../../forms';
 
 export type Props = {
   className?: string,
   classNameTitle?: string,
   title?: string,
-  children: ChangePasswordForm | CreateChatForm | SignInForm | SignUpForm | InfoChatForm | ProfileForm,
+  children: ChangePasswordForm | CreateChatForm | SignInForm | SignUpForm | SettingsForm,
 };

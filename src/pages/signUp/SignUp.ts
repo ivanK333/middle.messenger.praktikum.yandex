@@ -4,7 +4,6 @@ import {
   Link,
   Card,
 } from '../../components';
-import { ROUTES } from '../../appConstants';
 import { Slide } from '../../layouts';
 import { SignUpForm } from '../../forms';
 import template from './SignUp.hbs';
@@ -12,6 +11,8 @@ import { Block } from '../../libs';
 import { Props } from '.';
 
 import styles from './styles.module.pcss';
+import { router } from '../../router';
+import { ROUTES } from '../../appConstants';
 
 export class SignUp extends Block<Props> {
   constructor() {
@@ -58,7 +59,9 @@ export class SignUp extends Block<Props> {
             }),
             sign_in: new Link({
               children: 'Sign in',
-              href: ROUTES.signIn,
+              events: {
+                click: () => { router.go(ROUTES.signIn); },
+              },
             }),
           }),
         }),

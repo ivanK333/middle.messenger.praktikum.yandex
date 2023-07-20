@@ -10,12 +10,13 @@ import { Block } from '../../libs';
 import { Slide } from '../../layouts';
 import { ChangePasswordForm } from '../../forms';
 import template from './ChangePassword.hbs';
+import { router } from '../../router';
 
 export class ChangePassword extends Block<Props> {
   constructor() {
     super({
       slide: new Slide({
-        buttonBack: new ButtonBack({}),
+        buttonBack: new ButtonBack({ events: { click: () => router.back() } }),
         card: new Card({
           title: 'Change password',
           children: new ChangePasswordForm({
