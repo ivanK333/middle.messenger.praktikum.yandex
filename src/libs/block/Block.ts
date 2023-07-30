@@ -131,6 +131,10 @@ export class Block<P extends Record<string, unknown> = {}> {
     return this.element;
   }
 
+  get template(): string {
+    return this._element.outerHTML;
+  }
+
   private _makePropsProxy(props: BaseBlockProps<P>) {
     return new Proxy(props, {
       get(target, prop) {

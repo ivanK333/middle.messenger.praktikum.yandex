@@ -1,9 +1,16 @@
 {
+  "ts-node": {
+    "files": true,
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "compilerOptions": {
-    "target": "ESNext",
-    "allowSyntheticDefaultImports": true,
-    "useDefineForClassFields": true,
+    "target": "esnext",
     "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "Node",
     "resolveJsonModule": true,
@@ -20,5 +27,9 @@
     "sourceMap": true,
     "strictNullChecks": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "node_modules/@types/mocha/index.d.ts"
+  ]
 }
