@@ -10,6 +10,7 @@ global.window = window;
 global.document = window.document;
 global.DocumentFragment = window.DocumentFragment;
 global.FormData = window.FormData;
+global.XMLHttpRequest = window.XMLHttpRequest;
 
 require.extensions['.hbs'] = function (module, filename) {
   const contents = fs.readFileSync(filename, 'utf-8');

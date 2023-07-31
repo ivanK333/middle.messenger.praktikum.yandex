@@ -9,9 +9,6 @@ describe('HTTP TRANSPORT', () => {
   beforeEach(() => {
     xhr = sinon.useFakeXMLHttpRequest();
 
-    // @ts-expect-error
-    global.XMLHttpRequest = xhr;
-
     xhr.onCreate = (req) => {
       requests.push(req);
     };
