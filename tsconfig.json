@@ -8,6 +8,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "ESNext",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "useDefineForClassFields": true,
@@ -15,7 +16,6 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
     "noEmit": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,

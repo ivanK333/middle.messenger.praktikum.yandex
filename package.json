@@ -11,7 +11,7 @@
     "stylelint-fix": "npx stylelint \"**/*.pcss\" --fix",
     "preview": "vite preview",
     "prepare": "husky install",
-    "test": "mocha --require ts-node/register --require ./mochaSetup.cjs ./src/**/*.test.ts"
+    "test": "mocha --require ts-node/register --require ./mochaSetup.cjs './src/**/*.test.ts'"
   },
   "devDependencies": {
     "@types/chai": "4.3.5",
