@@ -21,7 +21,6 @@ describe('BUTTON', () => {
 
   it('Should be clickable', () => {
     const callback = sinon.stub();
-    // @ts-ignore
     const button = new Button({ view: 'default', children: props.children, events: { click: callback } });
 
     const element = button.element as HTMLElement;
