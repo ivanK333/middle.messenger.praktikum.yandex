@@ -2,7 +2,7 @@ import { Route } from '.';
 import { BlockConstructor } from '../block';
 import { ROUTES, STORAGE_KEYS } from '../../appConstants';
 
-export class Router {
+class Router {
   private static __instance: Router | null;
 
   public history: History;
@@ -91,3 +91,5 @@ export class Router {
     return this.routes.find((route) => route.match(pathname));
   }
 }
+
+export default Router;
