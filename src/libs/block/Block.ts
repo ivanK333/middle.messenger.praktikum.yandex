@@ -10,6 +10,7 @@ import { accessCheck, isEqual, cloneDeep } from '../../utils';
 export class Block<P extends Record<string, unknown> = {}> {
   public props: BaseBlockProps<P>;
 
+  // test
   public readonly eventBus: () => EventBus;
 
   private readonly _meta: Meta;
